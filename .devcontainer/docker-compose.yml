@@ -1,0 +1,45 @@
+version: "3"
+volumes:
+  db-store:
+  php-fpm-socket:
+services:
+  app:
+    build: ./docker/php
+    volumes:
+      - php-fpm-socket:/var/run/php-fpm
+      - ../src:/var/www/html/src
+      - ../.devcontainer:/var/www/html/.devcontainer
+      - ../.vscode:/var/www/html/.vscode
+    environment:
+      DB_HOST: db
+  db:
+    image: mysql:8
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/my.cnf
+      - db-store:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD='yes'
+      - MYSQL_DATABASE=laravel
+      - "TZ=Asia/Tokyo"
+  web:
+    image: nginx:alpine
+    ports:
+      - 8000:80
+    working_dir: /var/www/html/
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - php-fpm-socket:/var/run/php-fpm
+      - ../.devcontainer:/var/www/html/.devcontainer
+      - ../src:/var/www/html/src
+      - ../.vscode:/var/www/html/.vscode
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8888:80
+
+    # environment:
+    #   MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    #   MYSQL_DATABASE: laravel
