@@ -7,7 +7,7 @@ services:
     build: ./docker/php
     volumes:
       - php-fpm-socket:/var/run/php-fpm
-      - ../src:/var/www/html/src
+      - ..:/var/www/html
       - ../.devcontainer:/var/www/html/.devcontainer
       - ../.vscode:/var/www/html/.vscode
     environment:
@@ -25,12 +25,12 @@ services:
     image: nginx:alpine
     ports:
       - 8000:80
-    working_dir: /var/www/html/
+    working_dir: /var/www/html
     volumes:
       - ./docker/nginx:/etc/nginx/conf.d
       - php-fpm-socket:/var/run/php-fpm
       - ../.devcontainer:/var/www/html/.devcontainer
-      - ../src:/var/www/html/src
+      - ..:/var/www/html
       - ../.vscode:/var/www/html/.vscode
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest

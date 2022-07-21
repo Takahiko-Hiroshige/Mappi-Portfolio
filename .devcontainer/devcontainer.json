@@ -2,7 +2,7 @@
 {
     "name": "Mappi-App",
     "dockerComposeFile": ["docker-compose.yml"],
-    "workspaceFolder": "/var/www/html/",
+    "workspaceFolder": "/var/www/html",
     "service": "app",
     "extensions": [
 		"editorconfig.editorconfig"
@@ -14,7 +14,7 @@
     "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "cd src && composer install && npm install && composer run post-root-package-install && composer run post-create-project-cmd && sudo chmod o+w ./storage/ -R",
+    "postCreateCommand": "composer install && npm install && composer run post-root-package-install && composer run post-create-project-cmd && sudo chmod o+w ./storage/ -R",
 
     // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"
