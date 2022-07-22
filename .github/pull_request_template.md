@@ -1,7 +1,7 @@
-Example : close 番号 Issue name \
-close
+Example : close #番号 issuename \
+close #
 
-- 注意点
+- Rv注意点
   - []
 - 備考
   - []
