@@ -5,7 +5,8 @@
     "workspaceFolder": "/var/www/html",
     "service": "app",
     "extensions": [
-		"editorconfig.editorconfig"
+		"editorconfig.editorconfig",
+        "bmewburn.vscode-intelephense-client"
 	],
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
