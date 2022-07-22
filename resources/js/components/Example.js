@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@mui/material/Button';
+import React from "react";
+import ReactDOM from "react-dom";
+import Button from "@mui/material/Button";
 
 function Example() {
     return (
@@ -9,9 +9,12 @@ function Example() {
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-header">Example Component</div>
-
-                        <div className="card-body">I'm an example component!</div>
-                        <Button color="primary" variant="contained">野嶋っち！</Button>
+                        <div className="card-body">
+                            I'm an example component!!!
+                        </div>
+                        <Button color="primary" variant="contained">
+                            これからだ！
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -21,6 +24,6 @@ function Example() {
 
 export default Example;
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<Example />, document.getElementById('app'));
+if (document.getElementById("app")) {
+    ReactDOM.render(<Example />, document.getElementById("app"));
 }

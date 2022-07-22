@@ -6,7 +6,10 @@
     "service": "app",
     "extensions": [
 		"editorconfig.editorconfig",
-        "bmewburn.vscode-intelephense-client"
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "esbenp.prettier-vscode",
+        "oderwat.indent-rainbow",
 	],
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
@@ -15,7 +18,7 @@
     "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "composer install && npm install && composer run post-root-package-install && composer run post-create-project-cmd && sudo chmod o+w ./storage/ -R",
+    "postCreateCommand": "composer install && npm install && composer run post-root-package-install && composer run post-create-project-cmd && sudo chmod o+w ./storage/ -R && npm run watch-poll",
 
     // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"

@@ -13463,11 +13463,11 @@ function Example() {
             children: "Example Component"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "card-body",
-            children: "I'm an example component!"
+            children: "I'm an example component!!!"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
             color: "primary",
             variant: "contained",
-            children: "\u30AF\u30EA\u30C3\u30AF\u3057\u305F\u30891000\u4E07"
+            children: "\u3053\u308C\u304B\u3089\u3060\uFF01"
           })]
         })
       })
@@ -13477,8 +13477,8 @@ function Example() {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Example);
 
-if (document.getElementById('app')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Example, {}), document.getElementById('app'));
+if (document.getElementById("app")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Example, {}), document.getElementById("app"));
 }
 
 /***/ }),
