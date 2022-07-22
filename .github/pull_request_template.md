@@ -1,4 +1,4 @@
-# Example : close #番号 issuename \
+# Example : close #番号 IssueName
 close #
 
 # Rv注意点
