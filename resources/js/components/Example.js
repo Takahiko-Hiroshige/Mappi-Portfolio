@@ -13,7 +13,7 @@ function Example() {
                             I'm an example component!!!
                         </div>
                         <Button color="primary" variant="contained">
-                            これからだテスト！
+                            これからだ！
                         </Button>
                     </div>
                 </div>
