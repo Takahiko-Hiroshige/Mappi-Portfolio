@@ -10,6 +10,7 @@
         "xdebug.php-debug",
         "esbenp.prettier-vscode",
         "oderwat.indent-rainbow",
+        "usernamehw.errorlens"
 	],
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
