@@ -13467,7 +13467,7 @@ function Example() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
             color: "primary",
             variant: "contained",
-            children: "\u3053\u308C\u304B\u3089\u3060\uFF01"
+            children: "\u3053\u308C\u304B\u3089\u3060\u30C6\u30B9\u30C8\uFF01"
           })]
         })
       })
