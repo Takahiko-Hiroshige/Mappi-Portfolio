@@ -13,7 +13,7 @@ function Example() {
                             I'm an example component!!!
                         </div>
                         <Button color="primary" variant="contained">
-                            野嶋っち！
+                            マージ！
                         </Button>
                     </div>
                 </div>
