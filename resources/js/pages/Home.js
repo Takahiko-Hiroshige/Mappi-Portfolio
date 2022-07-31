@@ -1,14 +1,7 @@
 import React from "react";
 import { Button, Card } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import purple from "@material-ui/core/colors/purple";
+import MainTable from "../components/MainTable";
 
 //スタイルの定義
 const useStyles = makeStyles((theme) =>
@@ -16,12 +9,6 @@ const useStyles = makeStyles((theme) =>
         card: {
             margin: theme.spacing(5),
             padding: theme.spacing(3),
-        },
-        table: {
-            minWidth: 650,
-        },
-        tableHead: {
-            backgroundColor: purple["A100"],
         },
     })
 );
@@ -64,7 +51,6 @@ let rows = [
 function Home() {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
-
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -73,46 +59,7 @@ function Home() {
                         <h1>タスク管理</h1>
                         <Card className={classes.card}>
                             {/* テーブル部分の定義 */}
-                            <TableContainer component={Paper}>
-                                <Table
-                                    className={classes.table}
-                                    aria-label="simple table"
-                                >
-                                    {/* ヘッダー部分 */}
-                                    <TableHead className={classes.tableHead}>
-                                        <TableRow>
-                                            {headerList.map((item, index) => (
-                                                <TableCell
-                                                    align="center"
-                                                    key={index}
-                                                >
-                                                    {item}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHead>
-                                    {/* ボディ部分 */}
-                                    <TableBody>
-                                        {rows.map((row, index) => (
-                                            <TableRow key={index}>
-                                                {Object.keys(row).map(function (
-                                                    key,
-                                                    i
-                                                ) {
-                                                    return (
-                                                        <TableCell
-                                                            align="center"
-                                                            key={i}
-                                                        >
-                                                            {row[key]}
-                                                        </TableCell>
-                                                    );
-                                                })}
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+                            <MainTable headerList={headerList} rows={rows} />
                         </Card>
                     </div>
                 </div>
