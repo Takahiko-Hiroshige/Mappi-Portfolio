@@ -1,6 +1,6 @@
 import React from "react";
 //import ReactDOM from "react-dom";
-import Button from "@mui/material/Button";
+import Button from "@material-ui/core/Button";
 
 function Example() {
     return (
@@ -12,8 +12,8 @@ function Example() {
                         <div className="card-body">
                             I'm an example component!!!
                         </div>
-                        <Button color="secondary" variant="contained">
-                            Please Click if beginner!!!
+                        <Button color="secondary" variant="contained" href={`/`}>
+                            Go Home!!!
                         </Button>
                     </div>
                 </div>
