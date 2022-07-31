@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import Button from "@mui/material/Button";
 
 function Example() {
@@ -12,8 +12,8 @@ function Example() {
                         <div className="card-body">
                             I'm an example component!!!
                         </div>
-                        <Button color="primary" variant="contained">
-                            マージ！！
+                        <Button color="secondary" variant="contained">
+                            Please Click if beginner!!!
                         </Button>
                     </div>
                 </div>
@@ -23,7 +23,3 @@ function Example() {
 }
 
 export default Example;
-
-if (document.getElementById("app")) {
-    ReactDOM.render(<Example />, document.getElementById("app"));
-}

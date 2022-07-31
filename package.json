@@ -31,6 +31,8 @@
         "@mui/styled-engine-sc": "^5.8.0",
         "autoprefixer": "10.4.5",
         "react-query": "^3.39.1",
+        "react-router": "^6.3.0",
+        "react-router-dom": "^6.3.0",
         "styled-components": "^5.3.5"
     }
 }
