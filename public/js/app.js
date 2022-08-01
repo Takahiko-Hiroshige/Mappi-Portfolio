@@ -11420,7 +11420,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["defaul
   });
 });
 
-function MainTable(props) {
+var MainTable = function MainTable(props) {
   //定義したスタイルを利用するための設定
   var classes = useStyles(); //親コンポーネントからpropsで受け取る
 
@@ -11460,7 +11460,7 @@ function MainTable(props) {
       })
     })
   );
-}
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainTable);
 
@@ -11486,7 +11486,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Example() {
+var Example = function Example() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -11511,7 +11511,7 @@ function Example() {
       })
     })
   });
-}
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Example);
 
@@ -11560,7 +11560,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["default"])(function (theme) {
   return (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["default"])({
     card: {
-      margin: theme.spacing(5),
+      margin: theme.spacing(9),
       padding: theme.spacing(3)
     }
   });
@@ -11568,7 +11568,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["defaul
 
 var headerList = ["名前", "タスク内容", "編集", "完了"];
 
-function Home() {
+var Home = function Home() {
   //定義したスタイルを利用するための設定
   var classes = useStyles(); //postsの状態を管理する
 
@@ -11590,7 +11590,7 @@ function Home() {
     })["catch"](function () {
       console.log("通信に失敗しました");
     });
-  }; //空配列として定義する
+  }; //空配列として定義する // 配列にobjectをpushしている
 
 
   var rows = []; //postsの要素ごとにrowsで使える形式に変換する
@@ -11632,7 +11632,7 @@ function Home() {
       })
     })
   });
-}
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 

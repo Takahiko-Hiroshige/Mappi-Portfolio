@@ -8,7 +8,7 @@ import MainTable from "../components/MainTable";
 const useStyles = makeStyles((theme) =>
     createStyles({
         card: {
-            margin: theme.spacing(5),
+            margin: theme.spacing(9),
             padding: theme.spacing(3),
         },
     })
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) =>
 //ヘッダーのコンテンツ用の配列定義
 const headerList = ["名前", "タスク内容", "編集", "完了"];
 
-function Home() {
+const Home = () => {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
 
@@ -41,7 +41,7 @@ function Home() {
             });
     };
 
-    //空配列として定義する
+    //空配列として定義する // 配列にobjectをpushしている
     let rows = [];
     //postsの要素ごとにrowsで使える形式に変換する
     posts.map((post) =>
@@ -76,6 +76,6 @@ function Home() {
             </div>
         </div>
     );
-}
+};
 
 export default Home;

@@ -2,7 +2,7 @@ import React from "react";
 //import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
 
-function Example() {
+const Example = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
     })
 );
 
-function MainTable(props) {
+const MainTable = (props) => {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
 
