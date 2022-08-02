@@ -11584,7 +11584,7 @@ var Home = function Home() {
 
   var getPostsData = function getPostsData() {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/posts").then(function (response) {
-      setPosts(response.data); //バックエンドから返ってきたデータでpostsを更新する
+      setPosts(response.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
 
       console.log(response.data); //取得データ確認用のconsole.log()
     })["catch"](function () {

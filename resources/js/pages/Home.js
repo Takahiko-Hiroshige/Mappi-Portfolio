@@ -33,7 +33,7 @@ const Home = () => {
         axios
             .get("/api/posts")
             .then((response) => {
-                setPosts(response.data); //バックエンドから返ってきたデータでpostsを更新する
+                setPosts(response.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
                 console.log(response.data); //取得データ確認用のconsole.log()
             })
             .catch(() => {
