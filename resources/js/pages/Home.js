@@ -4,7 +4,9 @@ import { Button, Card } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MainTable from "../components/MainTable";
 import PostForm from "../components/PostForm";
-
+import Header from "../components/Header";
+import MainFeaturedPost from "../components/MainFeaturedPost";
+import Image from "./img/justin-hu-ljGiASOhUOU-unsplash.jpg";
 //スタイルの定義
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -76,6 +78,14 @@ const Home = () => {
             });
     };
 
+    const mainFeaturedPost = {
+        title: "Welecome to Japan!",
+        description: "～君の知らない世界を歩こう～",
+        image: Image,
+        imageText: "main image description",
+        linkText: "Continue reading…",
+    };
+
     //空配列として定義する // 配列にobjectをpushしている
     let rows = [];
     //postsの要素ごとにrowsで使える形式に変換する
@@ -97,23 +107,30 @@ const Home = () => {
     );
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-10">
-                    <div className="card">
-                        <h1>タスク管理</h1>
-                        <Card className={classes.card}>
-                            {/*関数を呼び出す*/}
-                            <PostForm
-                                data={formData}
-                                btnFunc={createPost}
-                                inputChange={inputChange}
-                            />
-                        </Card>
-                        <Card className={classes.card}>
-                            {/* テーブル部分の定義 */}
-                            <MainTable headerList={headerList} rows={rows} />
-                        </Card>
+        <div>
+            <Header></Header>
+            <MainFeaturedPost post={mainFeaturedPost} />
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-md-10">
+                        <div className="card">
+                            <h2>Event Information</h2>
+                            <Card className={classes.card}>
+                                {/*関数を呼び出す*/}
+                                <PostForm
+                                    data={formData}
+                                    btnFunc={createPost}
+                                    inputChange={inputChange}
+                                />
+                            </Card>
+                            <Card className={classes.card}>
+                                {/* テーブル部分の定義 */}
+                                <MainTable
+                                    headerList={headerList}
+                                    rows={rows}
+                                />
+                            </Card>
+                        </div>
                     </div>
                 </div>
             </div>
