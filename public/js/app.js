@@ -29287,6 +29287,7 @@ var Header = function Header(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(HideOnScroll, _objectSpread(_objectSpread({}, props), {}, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_AppBar__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        color: "inherit",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_7__["default"], {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
             variant: "h4",
@@ -29333,7 +29334,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function MainFeaturedPost(props) {
+var MainFeaturedPost = function MainFeaturedPost(props) {
   var post = props.post;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_Paper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     sx: {
@@ -29371,7 +29372,7 @@ function MainFeaturedPost(props) {
           sx: {
             position: "relative",
             p: {
-              xs: 3,
+              xs: 10,
               md: 6
             },
             pr: {
@@ -29385,20 +29386,20 @@ function MainFeaturedPost(props) {
             gutterBottom: true,
             children: post.title
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            variant: "h4",
+            variant: "h3",
             color: "inherit",
             paragraph: true,
             children: post.description
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Link__WEBPACK_IMPORTED_MODULE_6__["default"], {
             variant: "subtitle1",
-            href: "#",
+            href: "https://www.amazon.co.jp/",
             children: post.linkText
           })]
         })
       })
     })]
   });
-}
+};
 
 MainFeaturedPost.propTypes = {
   post: prop_types__WEBPACK_IMPORTED_MODULE_7___default().shape({
@@ -29480,6 +29481,7 @@ var MainTable = function MainTable(props) {
         className: classes.table,
         "aria-label": "simple table",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          color: "transparent",
           className: classes.tableHead,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_9__["default"], {
             children: headerList.map(function (item, index) {
@@ -29540,7 +29542,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["defaul
   });
 });
 
-function PostForm(props) {
+var PostForm = function PostForm(props) {
   var classes = useStyles();
   var data = props.data,
       inputChange = props.inputChange,
@@ -29571,7 +29573,7 @@ function PostForm(props) {
       children: "\u767B\u9332"
     })]
   });
-}
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PostForm);
 
@@ -29650,7 +29652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/PostForm */ "./resources/js/components/PostForm.js");
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Header */ "./resources/js/components/Header.js");
 /* harmony import */ var _components_MainFeaturedPost__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/MainFeaturedPost */ "./resources/js/components/MainFeaturedPost.js");
-/* harmony import */ var _img_justin_hu_ljGiASOhUOU_unsplash_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./img/justin-hu-ljGiASOhUOU-unsplash.jpg */ "./resources/js/pages/img/justin-hu-ljGiASOhUOU-unsplash.jpg");
+/* harmony import */ var _images_justin_hu_ljGiASOhUOU_unsplash_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../images/justin-hu-ljGiASOhUOU-unsplash.jpg */ "./resources/images/justin-hu-ljGiASOhUOU-unsplash.jpg");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -29779,11 +29781,11 @@ var Home = function Home() {
   }();
 
   var mainFeaturedPost = {
-    title: "Welecome to Japan!",
-    description: "～君の知らない世界を歩こう～",
-    image: _img_justin_hu_ljGiASOhUOU_unsplash_jpg__WEBPACK_IMPORTED_MODULE_6__["default"],
+    title: "Welcome to Fukuoka!",
+    description: "～福岡をEnjoy～",
+    image: _images_justin_hu_ljGiASOhUOU_unsplash_jpg__WEBPACK_IMPORTED_MODULE_6__["default"],
     imageText: "main image description",
-    linkText: "Continue reading…"
+    linkText: "Amazon"
   }; //空配列として定義する // 配列にobjectをpushしている
 
   var rows = []; //postsの要素ごとにrowsで使える形式に変換する
@@ -29816,7 +29818,7 @@ var Home = function Home() {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "card",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-              children: "Event Information"
+              children: "\u25CF\uFF5EEvent Information\uFF5E\u25CF"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
               className: classes.card,
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_PostForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -35521,10 +35523,10 @@ function supportedValue(property, value) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/img/justin-hu-ljGiASOhUOU-unsplash.jpg":
-/*!*******************************************************************!*\
-  !*** ./resources/js/pages/img/justin-hu-ljGiASOhUOU-unsplash.jpg ***!
-  \*******************************************************************/
+/***/ "./resources/images/justin-hu-ljGiASOhUOU-unsplash.jpg":
+/*!*************************************************************!*\
+  !*** ./resources/images/justin-hu-ljGiASOhUOU-unsplash.jpg ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

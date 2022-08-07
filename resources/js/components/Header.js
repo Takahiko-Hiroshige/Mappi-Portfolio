@@ -37,7 +37,7 @@ const Header = (props) => {
         <div>
             <CssBaseline />
             <HideOnScroll {...props}>
-                <AppBar>
+                <AppBar color='inherit'>
                     <Toolbar>
                         <Typography variant="h4" component="div">
                             Mappi

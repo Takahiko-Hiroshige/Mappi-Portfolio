@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) =>
     })
 );
 
-function PostForm(props) {
+const PostForm = (props) => {
     const classes = useStyles();
     const { data, inputChange, btnFunc } = props; //追記
     return (

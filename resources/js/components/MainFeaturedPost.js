@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 
-function MainFeaturedPost(props) {
+const MainFeaturedPost = (props) => {
     const { post } = props;
     return (
         <Paper
@@ -45,7 +45,7 @@ function MainFeaturedPost(props) {
                     <Box
                         sx={{
                             position: "relative",
-                            p: { xs: 3, md: 6 },
+                            p: { xs: 10, md: 6 },
                             pr: { md: 0 },
                         }}
                     >
@@ -57,10 +57,10 @@ function MainFeaturedPost(props) {
                         >
                             {post.title}
                         </Typography>
-                        <Typography variant="h4" color="inherit" paragraph>
+                        <Typography variant="h3" color="inherit" paragraph>
                             {post.description}
                         </Typography>
-                        <Link variant="subtitle1" href="#">
+                        <Link variant="subtitle1" href="https://www.amazon.co.jp/">
                             {post.linkText}
                         </Link>
                     </Box>

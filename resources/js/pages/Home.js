@@ -6,7 +6,8 @@ import MainTable from "../components/MainTable";
 import PostForm from "../components/PostForm";
 import Header from "../components/Header";
 import MainFeaturedPost from "../components/MainFeaturedPost";
-import Image from "./img/justin-hu-ljGiASOhUOU-unsplash.jpg";
+import Image from "../../images/justin-hu-ljGiASOhUOU-unsplash.jpg";
+
 //スタイルの定義
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -79,11 +80,11 @@ const Home = () => {
     };
 
     const mainFeaturedPost = {
-        title: "Welecome to Japan!",
-        description: "～君の知らない世界を歩こう～",
+        title: "Welcome to Fukuoka!",
+        description: "～福岡をEnjoy～",
         image: Image,
         imageText: "main image description",
-        linkText: "Continue reading…",
+        linkText: "Amazon",
     };
 
     //空配列として定義する // 配列にobjectをpushしている
@@ -114,7 +115,7 @@ const Home = () => {
                 <div className="row justify-content-center">
                     <div className="col-md-10">
                         <div className="card">
-                            <h2>Event Information</h2>
+                            <h2>●～Event Information～●</h2>
                             <Card className={classes.card}>
                                 {/*関数を呼び出す*/}
                                 <PostForm

@@ -37,7 +37,7 @@ const MainTable = (props) => {
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 {/* ヘッダー部分 */}
-                <TableHead className={classes.tableHead}>
+                <TableHead color='transparent' className={classes.tableHead}>
                     <TableRow>
                         {headerList.map((item, index) => (
                             <TableCell align="center" key={index}>
