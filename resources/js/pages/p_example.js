@@ -1,8 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Button from "@mui/material/Button";
+import Button from "@material-ui/core/Button";
 
-function Example() {
+const example = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -12,18 +11,18 @@ function Example() {
                         <div className="card-body">
                             I'm an example component!!!
                         </div>
-                        <Button color="primary" variant="contained">
-                            マージ！！
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            href={`/`}
+                        >
+                            Go Home!!!
                         </Button>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
-export default Example;
-
-if (document.getElementById("app")) {
-    ReactDOM.render(<Example />, document.getElementById("app"));
-}
+export default example;
