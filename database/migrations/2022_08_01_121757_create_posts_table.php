@@ -1,5 +1,12 @@
 <?php
 
+/**
+ *マイグレーションファイル
+ *テーブルのCreateを実行
+ *[CreateDate:2022-09-10]
+ *[CreateAt:T.Hiroshige]
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

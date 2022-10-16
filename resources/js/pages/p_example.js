@@ -1,8 +1,7 @@
 import React from "react";
-//import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
 
-const Example = () => {
+const example = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -12,7 +11,11 @@ const Example = () => {
                         <div className="card-body">
                             I'm an example component!!!
                         </div>
-                        <Button color="secondary" variant="contained" href={`/`}>
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            href={`/`}
+                        >
                             Go Home!!!
                         </Button>
                     </div>
@@ -20,6 +23,6 @@ const Example = () => {
             </div>
         </div>
     );
-}
+};
 
-export default Example;
+export default example;

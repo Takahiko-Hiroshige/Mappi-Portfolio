@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import MainTable from "../components/MainTable";
-import PostForm from "../components/PostForm";
-import Header from "../components/Header";
-import MainFeaturedPost from "../components/MainFeaturedPost";
-import Image from "../../images/justin-hu-ljGiASOhUOU-unsplash.jpg";
+import MainTable from "../components/c_main_table";
+import PostForm from "../components/c_post_form";
+import Header from "../components/c_header";
+import MainFeaturedPost from "../components/c_main_featured_post";
 
 //スタイルの定義
 const useStyles = makeStyles((theme) =>
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) =>
 //ヘッダーのコンテンツ用の配列定義
 const headerList = ["名前", "タスク内容", "編集", "完了"];
 
-const Home = () => {
+const top = () => {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
 
@@ -32,15 +31,15 @@ const Home = () => {
 
     //画面に到着したらgetPostsDataを呼ぶ
     useEffect(() => {
+        // useEffect内でAPI実施(関数を呼び出すのみ)
         getPostsData();
     }, []);
 
     const getPostsData = () => {
         axios
             .get("/api/posts")
-            .then((response) => {
-                setPosts(response.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
-                console.log(response.data); //取得データ確認用のconsole.log()
+            .then((res) => {
+                setPosts(res.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
             })
             .catch(() => {
                 console.log("通信に失敗しました");
@@ -82,7 +81,7 @@ const Home = () => {
     const mainFeaturedPost = {
         title: "Welcome to Fukuoka!",
         description: "～福岡をEnjoy～",
-        image: Image,
+        image: "../../images/justin-hu-ljGiASOhUOU-unsplash.jpg",
         imageText: "main image description",
         linkText: "Amazon",
     };
@@ -139,4 +138,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default top;
