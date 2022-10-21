@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/phpinfo', function () {
+//     phpinfo();
+// });
+
 Route::get('{any}', function () {
     return view('app');
-})->where('any','.*');
+})->where('any', '.*');
 
 // Auth::routes();
 
