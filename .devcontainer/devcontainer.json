@@ -19,9 +19,8 @@
     "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "composer install && composer require itsgoingd/clockwork && npm install && composer run post-root-package-install && composer run post-create-project-cmd && sudo chmod 777 ./storage/ -R && npm run watch-poll",
-
+    "postCreateCommand": "composer install && composer require itsgoingd/clockwork && npm install && composer run post-root-package-install && composer run post-create-project-cmd && sudo chmod 777 ./storage/ -R",
+    "postStartCommand": "npm run watch-poll",
     // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"
 }
-// o+w

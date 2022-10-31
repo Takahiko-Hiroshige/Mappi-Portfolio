@@ -1,5 +1,6 @@
 <?php
-
+//laravelでqueryを行う方法は大きく分けて2種類
+// クエリビルダーとEloquent
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -21,20 +22,27 @@ class PostController extends Controller
         // 一時保存されたUploadedFileの取得
 
         clock($request);
-        $image = $request->file('image');
+        $image = $request->file("image");
         // ファイルの保存と保存されたファイルのパス取得
-        $path = '';
+        $path = "";
         if (isset($image)) {
             // storage/app/public/imagesへAPIで送信された画像ファイルを配置
-            $path = $image->store('public/images/');
+            $path = $image->store("public/images/");
+            $submitPath = str_replace("public/", "", $path);
         }
+        try {
+            $post = new Post;
+            $post->name = $request->taskName;
+            $post->content = $request->content;
+            $post->fileName = $submitPath;
+            $post->save();
+            return response()->json($post);
+        } catch (\Exception $e) {
+            $error_code = $e->getMessage();
+            $error_message = $error_code;
+            return response()->json(['error' => $error_message], $this->errorCode);
 
-        $post = new Post;
-        $post->name = $request->taskName;
-        $post->content = $request->content;
-        $post->fileName = $path;
-        $post->save();
-        return response()->json($post, 200);
+
+        }
     }
 }
-//Storage::put('images/sushi.png', $image);

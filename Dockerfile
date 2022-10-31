@@ -1,3 +1,5 @@
+# このファイルは未使用です
+
 # NODE BUILDER
 FROM node as nodebuilder
 # Dependency

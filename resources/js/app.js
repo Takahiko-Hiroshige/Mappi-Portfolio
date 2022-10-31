@@ -13,3 +13,5 @@ require("./bootstrap");
  */
 
 require("./route");
+
+import "../css/app.css";

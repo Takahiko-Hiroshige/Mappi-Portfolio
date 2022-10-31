@@ -16,11 +16,12 @@ mix.webpackConfig({
         children: true,
     },
 });
-process.env
+process.env;
 /**
  *process.env.変数名で.envの環境変数を読み出せるように設定
  */
 mix.js("resources/js/app.js", "public/js")
     .react()
     .sass("resources/sass/app.scss", "public/css")
+    .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .env(process.env.ENV_FILE);
