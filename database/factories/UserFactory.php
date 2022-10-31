@@ -46,5 +46,3 @@ class UserFactory extends Factory
     }
 }
 
-
-//"watch": "mix watch",

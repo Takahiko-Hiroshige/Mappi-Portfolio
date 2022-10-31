@@ -1,5 +1,6 @@
 /**
- *Testing page
+ * Testing page
+ * 自由にお試しOKです
  */
 /**
  *import Library
@@ -15,8 +16,8 @@ import MainTable from "../components/c_main_table";
 import PostForm from "../components/c_post_form";
 import Header from "../components/c_header";
 import MainFeaturedPost from "../components/c_main_featured_post";
-
 import SampleComponent from "../components/sampleComponent.js";
+import images from "/var/www/html/public/images/justin-hu-ljGiASOhUOU-unsplash.jpg";
 
 //スタイルの定義
 const useStyles = makeStyles((theme) =>
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 //ヘッダーのコンテンツ用の配列定義
-const headerList = ["名前", "タスク内容", "編集", "完了"];
+const headerList = ["名前", "タスク内容", "画像", "編集", "完了"];
 
 const top = () => {
     //定義したスタイルを利用するための設定
@@ -51,14 +52,9 @@ const top = () => {
     }, []);
 
     const getPostsData = () => {
-        axios
-            .get("/api/posts")
-            .then((res) => {
-                setPosts(res.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
-            })
-            .catch(() => {
-                console.log("通信に失敗しました");
-            });
+        axios.get("/api/posts").then((res) => {
+            setPosts(res.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
+        });
     };
 
     //入力がされたら（都度）入力値を変更するためのfunction
@@ -70,7 +66,6 @@ const top = () => {
         };
         setData(dataObj);
     };
-
     const createPost = async () => {
         const formData = new FormData();
         //TODO::画像ファイル以外はJSONで送信
@@ -80,36 +75,37 @@ const top = () => {
         // データの送信形式を設定（必須）multipart
         const config = { headers: { "content-type": "multipart/form-data" } };
         //入力値を投げる
-        await axios
-            .post("/api/post/create", formData, config)
-            .then((res) => {
-                //戻り値をtodosにセット
-                // const tempPosts = posts;
-                // tempPosts.push(res.data);
-                // setPosts(tempPosts);
-                // setData("");
-            })
-            .catch((error) => {
-                console.log(error);
-                console.log("aa");
-            });
+        await axios.post("/api/post/create", formData, config).then((res) => {
+            //戻り値をtodosにセット
+            // const tempPosts = posts;
+            // tempPosts.push(res.data);
+            // setPosts(tempPosts);
+            // setData("");
+        });
+        // .catch((error) => {
+        //     console.log(error);
+        //     console.log("aa");
+        // });
     };
 
     const mainFeaturedPost = {
         title: "Welcome to Fukuoka!",
         description: "～福岡をEnjoy～",
-        image: `${process.env.MIX_IMG_PATH}images/kMeUzTItHafo98viBwtcZ10ATuup6NdhKvVwYAL3.png`,
+        image: images,
         imageText: "main image description",
         linkText: "Amazon",
     };
 
     //空配列として定義する // 配列にobjectをpushしている
     let rows = [];
+    const test = process.env.MIX_IMG_PATH;
+
     //postsの要素ごとにrowsで使える形式に変換する
     posts.map((post) =>
         rows.push({
             name: post.name,
             content: post.content,
+            img: <img src={String(test) + post.fileName} />,
             editBtn: (
                 <Button color="secondary" variant="contained">
                     編集
@@ -148,6 +144,7 @@ const top = () => {
                                     rows={rows}
                                 />
                             </Card>
+                            　
                         </div>
                     </div>
                 </div>

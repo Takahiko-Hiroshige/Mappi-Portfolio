@@ -1,3 +1,8 @@
+/*ErrorBoundary*
+ * Error boundaries catch errors during rendering, in lifecycle methods,
+ * and in constructors of the whole tree below them.
+ * https://ja.reactjs.org/docs/error-boundaries.html#gatsby-focus-wrapper
+ */
 import React from "react";
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -27,7 +32,7 @@ class ErrorBoundary extends React.Component {
         if (this.state.hasError) {
             return (
                 <div>
-                    <div>Reactで予期せぬエラーが発生しました...orz😒</div>
+                    <div>Reactで予期せぬエラーが発生しました。</div>
                     <pre>{this.state.error?.message}</pre>
                 </div>
             );
