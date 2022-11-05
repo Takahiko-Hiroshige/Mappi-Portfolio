@@ -39,6 +39,8 @@ RUN apt-get update \
     #
     # For php:7.4
     && apt-get -y install libonig-dev \
+    # autossh
+    && apt-get install autossh \
     #
     # Clean up
     && apt-get autoremove -y \

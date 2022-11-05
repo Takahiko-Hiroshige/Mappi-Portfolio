@@ -10,17 +10,17 @@ services:
       - ..:/var/www/html
       - ../.devcontainer:/var/www/html/.devcontainer
       - ../.vscode:/var/www/html/.vscode
-    environment:
-      DB_HOST: db
-  db:
-    image: mysql:8
-    volumes:
-      - ./docker/mysql/my.cnf:/etc/my.cnf
-      - db-store:/var/lib/mysql
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD='yes'
-      - MYSQL_DATABASE=laravel
-      - "TZ=Asia/Tokyo"
+    # environment:
+    #   DB_HOST: db
+  # db:
+  #   image: mysql:8
+  #   volumes:
+  #     - ./docker/mysql/my.cnf:/etc/my.cnf
+  #     - db-store:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_ALLOW_EMPTY_PASSWORD='yes'
+  #     - MYSQL_DATABASE=laravel
+  #     - "TZ=Asia/Tokyo"
   web:
     image: nginx:alpine
     ports:
@@ -32,13 +32,13 @@ services:
       - ../.devcontainer:/var/www/html/.devcontainer
       - ..:/var/www/html
       - ../.vscode:/var/www/html/.vscode
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    restart: always
-    depends_on:
-      - db
-    ports:
-      - 8888:80
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - 8888:80
 
     # environment:
     #   MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
