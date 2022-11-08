@@ -1,3 +1,7 @@
+/**
+ *Created:T.HIROSHIGE
+ *Created At:2022/11/01
+ */
 import { configureStore } from "@reduxjs/toolkit";
 import axiosErrorReducer from "./slices/axios_error_slice.js";
 

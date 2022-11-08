@@ -1,4 +1,8 @@
 /**
+ *Created:T.HIROSHIGE
+ *Created At:2022/11/01
+ */
+/**
  *【Redux Toolkit基本構成】
  * ユーザーの入力から、ActionCreatorがActionを作成する
  * StoreへActionをDispatch（送信）する

@@ -1,8 +1,11 @@
 module.exports = {
-    purge: [
-      "./resources/**/*.blade.php",
-      "./resources/**/*.js",
-      "./resources/**/*.jsx",
+    content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.jsx",
     ],
-    important: true,
-  };
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+};
