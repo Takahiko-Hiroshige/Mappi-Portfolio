@@ -1,6 +1,7 @@
 /**
  * Testing page
  * 自由にお試しOKです
+ * https://tailwindcss.com/docs/installation
  */
 /**
  *import Library
@@ -16,7 +17,6 @@ import MainTable from "../components/c_main_table";
 import PostForm from "../components/c_post_form";
 import Header from "../components/c_header";
 import MainFeaturedPost from "../components/c_main_featured_post";
-import SampleComponent from "../components/sampleComponent.js";
 import images from "/var/www/html/public/images/justin-hu-ljGiASOhUOU-unsplash.jpg";
 
 //スタイルの定義
@@ -38,6 +38,7 @@ const top = () => {
 
     //postsの状態を管理する
     const [posts, setPosts] = useState([]);
+
     //フォームの入力値を管理するステートの定義
     const [data, setData] = useState({
         taskName: "",
@@ -50,13 +51,11 @@ const top = () => {
         // useEffect内でAPI実施(関数を呼び出すのみ)
         getPostsData();
     }, []);
-
     const getPostsData = () => {
         axios.get("/api/posts").then((res) => {
             setPosts(res.data); //バックエンドから返ってきたデータでposts(setPosts)を更新する
         });
     };
-
     //入力がされたら（都度）入力値を変更するためのfunction
     const inputChange = (props) => {
         const { taskName, content } = props;
@@ -82,10 +81,6 @@ const top = () => {
             // setPosts(tempPosts);
             // setData("");
         });
-        // .catch((error) => {
-        //     console.log(error);
-        //     console.log("aa");
-        // });
     };
 
     const mainFeaturedPost = {
@@ -107,7 +102,7 @@ const top = () => {
             content: post.content,
             img: <img src={String(test) + post.fileName} />,
             editBtn: (
-                <Button color="secondary" variant="contained">
+                <Button className="w-72" color="secondary" variant="contained">
                     編集
                 </Button>
             ),
@@ -144,7 +139,6 @@ const top = () => {
                                     rows={rows}
                                 />
                             </Card>
-                            　
                         </div>
                     </div>
                 </div>

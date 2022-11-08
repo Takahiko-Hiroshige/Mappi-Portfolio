@@ -1,3 +1,7 @@
+/**
+ *Created:T.HIROSHIGE
+ *Created At:2022/11/01
+ */
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
@@ -44,24 +48,6 @@ export const AxiosErrorHandleProvider = ({ children }) => {
                 dispatch(ErrorEvent(ErrorData));
                 console.error("axiosによるAPI通信でエラーが発生しました");
                 console.error(error.response);
-                // switch (error.response?.status) {
-                //     case 404:
-                //         return Promise.reject(error.response?.data);
-                // Any status codes that falls outside the range of 2xx cause this function to trigger
-                // Do something with response error
-                // switch (error.response?.status) {
-                //     case 422: // ステータスコード別の処理
-                //         // Promise reject オブジェクトを必ずリターンする
-                //         return Promise.reject(error.response?.data);
-                //     case 404:
-                //         console.error(error.response);
-                //         // ステータスコード別の処理
-                //         return Promise.reject(error.response?.data);
-                //     case 500: // ステータスコード別の処理
-                //         return Promise.reject(error.response?.data);
-                //     default: // デフォルトの処理
-                //         return Promise.reject(error.response?.data);
-                // }
             }
         );
     }, []);

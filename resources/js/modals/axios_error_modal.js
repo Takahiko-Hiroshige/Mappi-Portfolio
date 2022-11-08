@@ -1,40 +1,5 @@
-import React, { useState, useEffect } from "react";
-// import Modal from "react-modal";
-// import { useDispatch } from "react-redux";
-import { ErrorEvent } from "../../redux/slices/axios_error_slice.js";
-
-// import { useSelector } from "react-redux";
-
-// const axiosErrorModal = () => {
-//     const dispatch = useDispatch();
-//     // storeを監視
-//     const errorInfoObj = useSelector((state) => state.isOpen.value);
-//     const { isOpen, status, statusText, errorInfo, errorExecApiUrl } =
-//         errorInfoObj;
-
-//     return (
-//         <div>
-//             <div className="hover:mix-blend-overlay bg-white">
-//                 <Modal
-//                     isOpen={isOpen}
-//                     style={{
-//                         overlay: {
-//                             zIndex: 100,
-//                         },
-//                         content: {
-//                             border: "none",
-//                             bordercolor: "border-red-800",
-//                         },
-//                     }}
-//                 >
-//                     <button onClick={() => dispatch(ErrorEvent())}>OK</button>
-//                 </Modal>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default axiosErrorModal;
+import React from "react";
+import { ErrorEvent } from "../redux/slices/axios_error_slice.js";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
