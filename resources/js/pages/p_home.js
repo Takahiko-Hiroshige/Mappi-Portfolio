@@ -1,14 +1,22 @@
+/**
+ *Created:T.HIROSHIGE && H.NOJIMA
+ *Created At:2022/11/10
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import MainTable from "../components/c_main_table";
-import PostForm from "../components/c_post_form";
+
 import Header from "../components/c_header";
-import MainFeaturedPost from "../components/c_main_featured_post";
+import TouristAreaList from "../layouts/l_tourist_area_list.js";
 
 const home = () => {
-    return <div></div>;
+    return (
+        <div>
+            <Header />
+            <div className="w-72 p-10">
+                <TouristAreaList />
+            </div>
+        </div>
+    );
 };
 
 export default home;

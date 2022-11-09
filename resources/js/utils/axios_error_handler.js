@@ -38,6 +38,7 @@ export const AxiosErrorHandleProvider = ({ children }) => {
                 return response;
             },
             (error) => {
+                // バッグエンド側（サーバー）でエラー発生の際に実行
                 const ErrorData = {
                     isOpen: true,
                     status: error.response?.status,

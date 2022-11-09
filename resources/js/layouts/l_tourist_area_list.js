@@ -1,52 +1,47 @@
 /**
- * Created T.HIROSHIGE
- * Created At 2022/10/23
+ *Created:T.HIROSHIGE
+ *Created At:2022/11/10
  */
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    Typography,
+} from "@material-tailwind/react";
 
-/**
- * import library
- */
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-
-const touristAreaCardList = () => {
+const touristAreaList = () => {
     return (
-        <div>
-            <Card sx={{ maxWidth: 500 }}>
-                <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="160"
-                    image="/static/images/cards/contemplative-reptile.jpg"
+        <Card className="w-96">
+            <CardHeader color="blue" className="relative h-56">
+                <img
+                    src="/img/blog.jpg"
+                    alt="img-blur-shadow"
+                    className="h-full w-full"
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        博多駅
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
-                    </Typography>
-                </CardContent>
-                <div className="flex justify-end">
-                    <CardActions>
-                        <Button size="small">Share</Button>
-                    </CardActions>
-                    <IconButton>
-                        <CheckCircleOutlinedIcon color="secondary" />
-                    </IconButton>
-                </div>
-            </Card>
-        </div>
+            </CardHeader>
+            <CardBody className="text-center">
+                <Typography variant="h5" className="mb-2">
+                    Cozy 5 Stars Apartment
+                </Typography>
+                <Typography>
+                    The place is close to Barceloneta Beach and bus stop just 2
+                    min by walk and near to "Naviglio" where you can enjoy the
+                    main night life in Barcelona.
+                </Typography>
+            </CardBody>
+            <CardFooter
+                divider
+                className="flex items-center justify-between py-3"
+            >
+                <Typography variant="small">$899/night</Typography>
+                <Typography variant="small" color="gray" className="flex gap-1">
+                    <i className="fas fa-map-marker-alt fa-sm mt-[3px]" />
+                    Barcelona, Spain
+                </Typography>
+            </CardFooter>
+        </Card>
     );
 };
 
-export default touristAreaCardList;
+export default touristAreaList;
