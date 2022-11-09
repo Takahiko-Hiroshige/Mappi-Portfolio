@@ -1,3 +1,7 @@
+/**
+ *Created:T.HIROSHIGE
+ *Created At:2022/11/01
+ */
 import React from "react";
 import { ErrorEvent } from "../redux/slices/axios_error_slice.js";
 import { useDispatch } from "react-redux";
@@ -27,13 +31,13 @@ const axiosErrorModal = () => {
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
                                     <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                    {`エラー内容：${statusText}`}
+                                        {`エラー内容：${statusText}`}
                                     </p>
                                     <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                    {`エラー詳細：${errorInfo}`}
+                                        {`エラー詳細：${errorInfo}`}
                                     </p>
                                     <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                    {`APIURL：${errorExecApi}`}
+                                        {`APIURL：${errorExecApi}`}
                                     </p>
                                 </div>
                                 {/*footer*/}

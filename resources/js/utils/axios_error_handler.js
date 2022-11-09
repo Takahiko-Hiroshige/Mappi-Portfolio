@@ -48,6 +48,7 @@ export const AxiosErrorHandleProvider = ({ children }) => {
                 dispatch(ErrorEvent(ErrorData));
                 console.error("axiosによるAPI通信でエラーが発生しました");
                 console.error(error.response);
+                return Promise.reject(error);
             }
         );
     }, []);
