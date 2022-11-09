@@ -23,7 +23,7 @@ const SearchBoxSample = () => {
     useEffect(() => {
         axios
             .get(
-                `http://geoapi.heartrails.com/api/json?method=getCities&prefectur=${area}`
+                `http://geoapi.heartrails.com/api/json?method=getCities&prefecture=${area}`
             )
             .then((res) => {
                 const location = res.data.response.location;
