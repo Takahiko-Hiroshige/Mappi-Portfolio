@@ -2,3 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* At last you have to copy these css styles from here ,Create a CSS file and paste it and import the file */
+/*
+ * swiperの指定
+ */
+.swiper-button-next,
+.swiper-button-prev {
+    --swiper-navigation-color: #808080!important;
+    --swiper-navigation-size:20px!important;
+}
+/* ページネーションのサイズと色 */
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: white;
+    opacity: 1;
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 1px!important;
+}
+
+.swiper-slide > img {
+    object-fit: cover!important;
+}

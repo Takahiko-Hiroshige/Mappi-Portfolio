@@ -17,6 +17,7 @@ import IndexForDev from "./pages/index_for_dev.js";
 import Top from "./pages/p_top.js";
 import Home from "./pages/p_home.js";
 import SearchBoxSample from "./pages/p_select_box_sample.js";
+import TouristAreaRegister from "./pages/p_tourist_area_register.js";
 
 const App = () => {
     return (
@@ -26,6 +27,10 @@ const App = () => {
                 <Route path="/top" element={<Top />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/searchBoxSample" element={<SearchBoxSample />} />
+                <Route
+                    path="/touristAreaRegister"
+                    element={<TouristAreaRegister />}
+                />
             </Routes>
         </div>
     );

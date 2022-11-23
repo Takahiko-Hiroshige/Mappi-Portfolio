@@ -10,7 +10,8 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-const touristAreaList = () => {
+const touristAreaList = (props) => {
+    const {} = props;
     return (
         <Card className="w-96">
             <CardHeader color="blue" className="relative h-56">
