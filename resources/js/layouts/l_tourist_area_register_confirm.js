@@ -15,6 +15,7 @@ import TouristAreaDisplay from "../components/l_tourist_area_display.js";
 
 const TouristAreaRegisterConfirm = (props) => {
     const {
+        displayImage,
         imageArray,
         touristAreaName,
         touristAreaCatchPhrase,
@@ -23,10 +24,10 @@ const TouristAreaRegisterConfirm = (props) => {
     } = props;
 
     return (
-        <div>
+        <div className="bg-stone-100 p-14 rounded-lg border">
             <div className="mb-24 flex justify-center items-center">
                 <TouristAreaDisplay
-                    image={imageArray[0]}
+                    image={displayImage.filePath || imageArray[0]?.filePath}
                     touristAreaName={touristAreaName}
                     touristAreaCatchPhrase={touristAreaCatchPhrase}
                     touristAreaDeTail={touristAreaDeTail}

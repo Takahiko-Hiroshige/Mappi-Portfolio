@@ -29,7 +29,7 @@ const ImageSwiper = (props) => {
         imageArray /**【必須】画像 型:配列 */,
         optionsProps,
     } = props;
-    const displayImage = imageArray[0] || noImage;
+
     const {
         speed = 1000 /**スライド速度 */,
         slidesPerView = 2 /**表示枚数 （例）2の場合: 0.5 1.0 0.5形式で表示 */,
@@ -95,8 +95,11 @@ const ImageSwiper = (props) => {
                     </SwiperSlide>
                 ) : (
                     imageArray.map((image) => (
-                        <SwiperSlide key={image}>
-                            <img src={image} style={{ ...sliderBoxStyle }} />
+                        <SwiperSlide key={image.fileName}>
+                            <img
+                                src={image.filePath}
+                                style={{ ...sliderBoxStyle }}
+                            />
                         </SwiperSlide>
                     ))
                 )}
