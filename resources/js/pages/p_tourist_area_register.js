@@ -15,6 +15,7 @@ import TouristAreaRegisterConfirm from "../layouts/l_tourist_area_register_confi
 
 const TouristAreaRegisterForm = () => {
     const [imageArray, setImageArray] = useState([]);
+    const [displayImage, setDisplayImage] = useState("");
     const [touristAreaName, setTouristAreaName] = useState("");
     const [touristAreaCatchPhrase, setTouristAreaCatchPhrase] = useState("");
     const [touristAreaDeTail, setTouristAreaDeTail] = useState("");
@@ -26,6 +27,7 @@ const TouristAreaRegisterForm = () => {
                 {/* イメージ@観光地登録画面 */}
                 <div className="flex-1 h-screen w-screen flex justify-center items-center">
                     <TouristAreaRegisterConfirm
+                        displayImage={displayImage}
                         imageArray={imageArray}
                         touristAreaName={touristAreaName}
                         touristAreaCatchPhrase={touristAreaCatchPhrase}
@@ -36,6 +38,7 @@ const TouristAreaRegisterForm = () => {
                 {/* 入力フォーム@観光地登録画面 */}
                 <div className="flex-1 h-screen bg-white overflow-scroll w-32">
                     <TouristAreaRegisterInput
+                        setDisplayImage={setDisplayImage}
                         imageArray={imageArray}
                         setImageArray={setImageArray}
                         setTouristAreaName={setTouristAreaName}

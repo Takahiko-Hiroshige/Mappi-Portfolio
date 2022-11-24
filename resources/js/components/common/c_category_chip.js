@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 // };
 
 const CategoryChip = (props) => {
-    const { categories } = props;
+    const { categories, size = "small", onDelete } = props;
 
     let palette = {};
     categories.forEach((category) => {
@@ -30,6 +30,10 @@ const CategoryChip = (props) => {
         palette,
     });
 
+    const options = { size };
+    // TODO::検索機能の際だけ追加するようにする
+    // onDelete={handleDelete}
+    if (onDelete) options["onDelete"] = { ...onDelete };
     return (
         <div>
             <Stack direction="row" spacing={1}>
@@ -39,11 +43,9 @@ const CategoryChip = (props) => {
                         return (
                             <Chip
                                 key={category.value}
-                                size="small"
                                 label={category.label}
                                 color={color}
-                                // TODO::検索機能の際だけ追加するようにする
-                                // onDelete={handleDelete}
+                                {...options}
                             />
                         );
                     })}
