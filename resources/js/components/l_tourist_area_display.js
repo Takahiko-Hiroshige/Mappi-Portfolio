@@ -42,7 +42,7 @@ const TouristAreaDisplay = (props) => {
                     className={"h-full w-full object-cover"}
                 />
                 <div className="absolute h-7 bottom-0 w-full bg-gradient-to-r from-neutral-400">
-                    <p className={"font-bold text-lg ml-2 truncate"}>
+                    <p className={"font-bold text-lg text-white ml-2 truncate"}>
                         {touristAreaName}
                     </p>
                 </div>
