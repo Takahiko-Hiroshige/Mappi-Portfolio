@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import AxiosErrorModal from "./modals/axios_error_modal.js";
 import { AxiosErrorHandleProvider } from "./utils/axios_error_handler.js";
+import Header from "./components/c_header";
 /**
  * page component
  */
@@ -46,6 +47,9 @@ ReactDOM.render(
             <Provider store={store}>
                 <AxiosErrorHandleProvider>
                     <AxiosErrorModal />
+                    <div className="sticky top-0">
+                        <Header />
+                    </div>
                     <App />
                 </AxiosErrorHandleProvider>
             </Provider>
