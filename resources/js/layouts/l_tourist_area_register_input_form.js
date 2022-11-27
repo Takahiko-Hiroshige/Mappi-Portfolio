@@ -6,26 +6,27 @@
 /**
  *import Library
  */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 /**
  *import components
  */
 import SelectBox from "../components/common/c_select_box.js";
 
-//削除(必須)
-//URL.revokeObjectURL( objectUrl );//リロードしたら消えるから不要？
-
-const TouristAreaRegisterInput = (props) => {
+const TouristAreaRegisterInputForm = (props) => {
     const {
+        displayImage,
         setDisplayImage,
         imageArray,
         setImageArray,
+        touristAreaName,
         setTouristAreaName,
+        touristAreaCatchPhrase,
         setTouristAreaCatchPhrase,
+        touristAreaDeTail,
         setTouristAreaDeTail,
-        setCategoryListSelectValue,
         categoryListSelectValue,
+        setCategoryListSelectValue,
     } = props;
 
     const area = "福岡県";
@@ -47,6 +48,12 @@ const TouristAreaRegisterInput = (props) => {
     ] = useState(true);
     const [inputSameFileErrorMessage, setInputSameFileErrorMessage] =
         useState("");
+    const [isHiddenDeleteFileErrorMessage, setIsHiddenDeleteFileErrorMessage] =
+        useState(true);
+    const [deleteFileErrorMessage, setDeleteFileErrorMessage] = useState("");
+
+    const inputRef = useRef(null);
+
     // 福岡県の市町村を取得[API]
     useEffect(() => {
         axios
@@ -66,6 +73,12 @@ const TouristAreaRegisterInput = (props) => {
                 setCityListOptions(cityList);
             });
     }, []);
+
+    useEffect(() => {
+        if (!displayImage && imageArray.length > 0) {
+            setDisplayImage(imageArray[0]);
+        }
+    }, [imageArray]);
 
     //TODO::カテゴリは後ほどDBから取得するように変更予定
     const categoryOptions = [
@@ -123,10 +136,10 @@ const TouristAreaRegisterInput = (props) => {
         if (!e.target.files || e.target.files.length === 0) return;
         const fileObject = e.target.files[0];
         const fileName = fileObject.name.replace("C:\fakepath", "");
-        // 画像保存先のURLを生成し、useState()を更新
         if (imageArray.some((image) => image.fileName === fileName)) {
             setIsHiddenInputSameFileErrorMessage(false);
             setInputSameFileErrorMessage("同じ名前のファイルは選択できません");
+            e.target.value = "";
             return;
         }
         setImageArray([
@@ -137,12 +150,80 @@ const TouristAreaRegisterInput = (props) => {
             },
         ]);
         setIsHiddenInputSameFileErrorMessage(true);
+        setIsHiddenDeleteFileErrorMessage(true);
+        e.target.value = "";
     };
 
+    const onClickDeleteFileButton = (image) => {
+        if (displayImage.fileName === image.fileName) {
+            setIsHiddenDeleteFileErrorMessage(false);
+            setDeleteFileErrorMessage("選択中の画像は削除できません");
+            return;
+        }
+        const onAfterDeleteFileImageArray = imageArray.filter(
+            (_image) => _image.fileName !== image.fileName
+        );
+        URL.revokeObjectURL(image.filePath);
+        setImageArray([...onAfterDeleteFileImageArray]);
+        setIsHiddenDeleteFileErrorMessage(true);
+        setIsHiddenInputSameFileErrorMessage(true);
+    };
+
+    const fileUpload = () => {
+        inputRef.current.click();
+    };
+
+    //TODO::バリデーションチェック・登録機能実装要
+    const onClickSubmitButton = () => {
+        const submitDataObj = {
+            touristAreaName,
+            postal,
+            cityListSelectValue,
+            numberAddress,
+            otherAddress,
+            phoneNumber,
+            displayImage,
+            imageArray,
+            categoryListSelectValue,
+            touristAreaCatchPhrase,
+            touristAreaDeTail,
+        };
+        // console.warn(submitDataObj);
+    };
     return (
         <div>
-            <div className="border-solid border border-gray-800 bg-gray-100 p-2">
-                <h3>≪観光地登録≫</h3>
+            <div className="flex w-full h-10 mb-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-7 h-7 mt-2"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                    />
+                </svg>
+                <h3 className="w-60 p-2 text-stone-900">観光地登録</h3>
+                <div className="flex justify-end w-full">
+                    <button
+                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                        onClick={onClickSubmitButton()}
+                    >
+                        下書き保存
+                    </button>
+                    <button
+                        className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                        onClick={onClickSubmitButton()}
+                    >
+                        投稿
+                    </button>
+                </div>
+            </div>
+            <div className="border-solid border border-gray-800 bg-gray-100 p-2 h-[48rem] overflow-scroll">
                 <div className="mb-3">
                     <label
                         htmlFor="touristAreaName"
@@ -175,7 +256,10 @@ const TouristAreaRegisterInput = (props) => {
                             className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                             placeholder="例）0000000"
                             required
-                            onChange={(e) => setPostal(e.target.value)}
+                            onChange={(e) => {
+                                setPostal(e.target.value);
+                                setIsHiddenNotFoundAddressErrorMessage(true);
+                            }}
                             onKeyPress={(e) => {
                                 if (e.key === "Enter") {
                                     onClickPostalButton();
@@ -285,12 +369,20 @@ const TouristAreaRegisterInput = (props) => {
                         ➤画像　※複数選択可能
                     </label>
                     <input
-                        className="block w-full mb-2 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-300"
+                        hidden={true}
                         id="file_input"
+                        ref={inputRef}
                         type="file"
                         accept="image/*"
                         onChange={onFileInputChange}
                     />
+                    <button
+                        type="button"
+                        className="text-white bg-cyan-400 hover:bg-cyan-200 font-medium rounded-full text-sm px-5 p-2 text-center mb-2"
+                        onClick={fileUpload}
+                    >
+                        画像をアップロード
+                    </button>
                     <p
                         hidden={isHiddenInputSameFileErrorMessage}
                         className="ml-3 mb-3 text-sm font-medium text-red-600"
@@ -304,12 +396,19 @@ const TouristAreaRegisterInput = (props) => {
                     >
                         ➤表示する画像を選択してください
                     </label>
+                    <p
+                        hidden={isHiddenDeleteFileErrorMessage}
+                        className="ml-3 mb-1 text-sm font-medium text-red-600"
+                    >
+                        {deleteFileErrorMessage}
+                    </p>
                     {imageArray?.map((image, i) => {
                         const defaultOptionObj = {
                             id: image.fileName,
                             type: "radio",
                             name: "selectDisplayImage",
                             value: image.fileName,
+
                             className:
                                 "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2",
                             onChange: (e) => {
@@ -320,7 +419,10 @@ const TouristAreaRegisterInput = (props) => {
                         const setOptionObj =
                             i !== 0
                                 ? defaultOptionObj
-                                : { ...defaultOptionObj, defaultChecked: true };
+                                : {
+                                      ...defaultOptionObj,
+                                      defaultChecked: true,
+                                  };
 
                         return (
                             <div
@@ -330,10 +432,27 @@ const TouristAreaRegisterInput = (props) => {
                                 <input {...setOptionObj} />
                                 <label
                                     htmlFor="defaultRadio"
-                                    className="ml-2 text-sm font-medium text-gray-900"
+                                    className="ml-2 text-sm font-medium text-gray-900 truncate w-80"
                                 >
                                     {image.fileName}
                                 </label>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6 p-1 cursor-pointer"
+                                    onClick={() =>
+                                        onClickDeleteFileButton(image)
+                                    }
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
                             </div>
                         );
                     })}
@@ -413,4 +532,4 @@ const TouristAreaRegisterInput = (props) => {
     );
 };
 
-export default TouristAreaRegisterInput;
+export default TouristAreaRegisterInputForm;

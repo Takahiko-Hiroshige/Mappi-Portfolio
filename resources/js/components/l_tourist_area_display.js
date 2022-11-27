@@ -34,7 +34,6 @@ const TouristAreaDisplay = (props) => {
     return (
         <Card className="w-96 border rounded-lg">
             <CardHeader
-                color="blue"
                 className="relative h-56 m-2"
                 onClick={() => console.log("モダールを開く処理を実装要")}
             >

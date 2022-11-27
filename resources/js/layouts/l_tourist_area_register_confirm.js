@@ -24,7 +24,7 @@ const TouristAreaRegisterConfirm = (props) => {
     } = props;
 
     return (
-        <div className="bg-stone-100 p-14 rounded-lg border">
+        <div className="bg-stone-100 p-10 rounded-lg border">
             <div className="mb-24 flex justify-center items-center">
                 <TouristAreaDisplay
                     image={displayImage.filePath || imageArray[0]?.filePath}
