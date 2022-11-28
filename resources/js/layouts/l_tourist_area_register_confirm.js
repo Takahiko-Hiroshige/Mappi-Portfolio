@@ -24,7 +24,7 @@ const TouristAreaRegisterConfirm = (props) => {
     } = props;
 
     return (
-        <div className="bg-stone-100 p-10 rounded-lg border">
+        <div className="w-[90%] m-5">
             <div className="mb-24 flex justify-center items-center">
                 <TouristAreaDisplay
                     image={displayImage.filePath || imageArray[0]?.filePath}
@@ -34,10 +34,10 @@ const TouristAreaRegisterConfirm = (props) => {
                     categoryListSelectValue={categoryListSelectValue}
                 />
             </div>
-            <div>
+            <div className="flex justify-center items-center">
                 <ImageSwiper
                     imageArray={imageArray}
-                    imageSize={1.5}
+                    imageSize={2.0}
                     optionsProps={{
                         slidesPerView: 2,
                         autoplay: { isAutoplay: true },

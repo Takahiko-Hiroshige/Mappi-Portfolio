@@ -191,8 +191,8 @@ const TouristAreaRegisterInputForm = (props) => {
         // console.warn(submitDataObj);
     };
     return (
-        <div>
-            <div className="flex w-full h-10 mb-2">
+        <div className="w-[90%] h-full">
+            <div className="flex justify-center h-10 mb-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -207,8 +207,9 @@ const TouristAreaRegisterInputForm = (props) => {
                         d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
                     />
                 </svg>
-                <h3 className="w-60 p-2 text-stone-900">観光地登録</h3>
-                <div className="flex justify-end w-full">
+                <h3 className="p-2 text-stone-900 w-60">観光地登録</h3>
+
+                <div className="flex w-full justify-end">
                     <button
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                         onClick={onClickSubmitButton()}
@@ -223,7 +224,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     </button>
                 </div>
             </div>
-            <div className="border-solid border border-gray-800 bg-gray-100 p-2 h-[48rem] overflow-scroll">
+            <div className="w-full h-[75%] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-scroll">
                 <div className="mb-3">
                     <label
                         htmlFor="touristAreaName"
@@ -233,7 +234,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     </label>
                     <input
                         type="text"
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）博多駅"
                         required
                         onChange={(e) => {
@@ -253,7 +254,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         </div>
                         <input
                             type="tel"
-                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                             placeholder="例）0000000"
                             required
                             onChange={(e) => {
@@ -269,16 +270,11 @@ const TouristAreaRegisterInputForm = (props) => {
                     </div>
                     <div className="ml-3">
                         <button
-                            className="bg-blue-700 hover:bg-blue-600 text-white rounded px-4 py-2 mt-7"
+                            className="w-32 bg-blue-700 hover:bg-blue-600 text-white rounded px-4 py-2 mt-7"
                             onClick={() => onClickPostalButton()}
                         >
                             住所検索
                         </button>
-                    </div>
-                    <div>
-                        <p className="ml-3 block text-sm font-medium text-gray-900 mt-9">
-                            郵便番号から住所検索
-                        </p>
                     </div>
                 </div>
                 <p
@@ -287,8 +283,8 @@ const TouristAreaRegisterInputForm = (props) => {
                 >
                     {notFoundAddressErrorMessage}
                 </p>
-                <div className="flex mb-2">
-                    <div className="w-56">
+                <div className="flex w-full mb-2">
+                    <div className="w-1/2">
                         <label
                             htmlFor="touristAreaName"
                             className="ml-1 block mb-2 text-sm font-medium text-gray-900"
@@ -307,7 +303,7 @@ const TouristAreaRegisterInputForm = (props) => {
                             }
                         />
                     </div>
-                    <div className="w-96 ml-3">
+                    <div className="ml-3 w-1/2">
                         <label
                             htmlFor="touristAreaName"
                             className="ml-1 block mb-2 text-sm font-medium text-gray-900"
@@ -316,7 +312,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         </label>
                         <input
                             type="text"
-                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                            className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                             placeholder="例）〇〇1-1-1"
                             required
                             value={numberAddress}
@@ -326,7 +322,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         />
                     </div>
                 </div>
-                <div className="mb-3">
+                <div className="w-full mb-3">
                     <label
                         htmlFor="touristAreaCatchPhrase"
                         className="ml-1 block mb-2 text-sm font-medium text-gray-900"
@@ -336,7 +332,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     <input
                         type="text"
                         id="touristAreaCatchPhrase"
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）建物・マンション名　〇号室"
                         required
                         onChange={(e) => {
@@ -344,7 +340,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         }}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="w-full mb-3">
                     <label
                         htmlFor="phoneNumber"
                         className="ml-1 block mb-2 text-sm font-medium text-gray-900"
@@ -353,7 +349,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     </label>
                     <input
                         type="tel"
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）00000000000"
                         required
                         onChange={(e) => {
@@ -432,7 +428,7 @@ const TouristAreaRegisterInputForm = (props) => {
                                 <input {...setOptionObj} />
                                 <label
                                     htmlFor="defaultRadio"
-                                    className="ml-2 text-sm font-medium text-gray-900 truncate w-80"
+                                    className="ml-2 text-sm font-medium text-gray-900 truncate"
                                 >
                                     {image.fileName}
                                 </label>
@@ -473,7 +469,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         placeholder="カテゴリ"
                     />
                 </div>
-                <div className="mb-3">
+                <div className="w-full mb-3">
                     <label
                         htmlFor="touristAreaCatchPhrase"
                         className="ml-1 block mb-2 text-sm font-medium text-gray-900 text-black"
@@ -483,7 +479,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     <input
                         type="text"
                         id="touristAreaCatchPhrase"
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）福岡最大級のステーション！！"
                         required
                         onChange={(e) => {
@@ -491,7 +487,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         }}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="w-full mb-3">
                     <label
                         htmlFor="touristDetail"
                         className="ml-1 block mb-2 text-sm font-medium text-gray-900"
@@ -501,7 +497,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     <textarea
                         id="touristDetail"
                         rows="4"
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="観光地の説明文を入力してください"
                         required
                         onChange={(e) => {
@@ -509,7 +505,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         }}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="w-full mb-3">
                     <label
                         htmlFor="touristAreaCatchPhrase"
                         className="ml-1 block mb-2 text-sm font-medium text-gray-900"
@@ -519,7 +515,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     <input
                         type="text"
                         id="touristAreaCatchPhrase"
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）https://mappi.com/"
                         required
                         onChange={(e) => {

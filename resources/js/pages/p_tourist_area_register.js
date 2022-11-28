@@ -22,21 +22,10 @@ const TouristAreaRegister = () => {
     const [categoryListSelectValue, setCategoryListSelectValue] = useState([]);
 
     return (
-        <div className="bg-zinc-50">
-            <div className="flex flex-row w-full">
-                {/* イメージ@観光地登録画面 */}
-                <div className="flex-1 h-screen w-screen flex justify-center items-center">
-                    <TouristAreaRegisterConfirm
-                        displayImage={displayImage}
-                        imageArray={imageArray}
-                        touristAreaName={touristAreaName}
-                        touristAreaCatchPhrase={touristAreaCatchPhrase}
-                        touristAreaDeTail={touristAreaDeTail}
-                        categoryListSelectValue={categoryListSelectValue}
-                    />
-                </div>
+        <div>
+            <div className="flex mt-3">
                 {/* 入力フォーム@観光地登録画面 */}
-                <div className="flex-1 h-screen w-screen flex justify-center items-center">
+                <div className="flex w-1/2 justify-end mr-5 ml-3">
                     <TouristAreaRegisterInputForm
                         displayImage={displayImage}
                         setDisplayImage={setDisplayImage}
@@ -52,9 +41,21 @@ const TouristAreaRegister = () => {
                         setCategoryListSelectValue={setCategoryListSelectValue}
                     />
                 </div>
+                {/* イメージ@観光地登録画面 */}
+                <div className="flex w-1/2 justify-start ml-5 mr-3">
+                    <TouristAreaRegisterConfirm
+                        displayImage={displayImage}
+                        imageArray={imageArray}
+                        touristAreaName={touristAreaName}
+                        touristAreaCatchPhrase={touristAreaCatchPhrase}
+                        touristAreaDeTail={touristAreaDeTail}
+                        categoryListSelectValue={categoryListSelectValue}
+                    />
+                </div>
             </div>
         </div>
     );
 };
 
 export default TouristAreaRegister;
+// flex-1 h-screen w-screen flex justify-center items-center
