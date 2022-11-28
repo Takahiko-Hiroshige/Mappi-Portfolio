@@ -224,7 +224,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     </button>
                 </div>
             </div>
-            <div className="w-full h-[75%] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-scroll">
+            <div className="w-full h-[43rem] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-scroll">
                 <div className="mb-3">
                     <label
                         htmlFor="touristAreaName"
@@ -374,7 +374,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     />
                     <button
                         type="button"
-                        className="text-white bg-cyan-400 hover:bg-cyan-200 font-medium rounded-full text-sm px-5 p-2 text-center mb-2"
+                        className="text-white bg-sky-400 hover:bg-sky-200 font-medium rounded-full text-sm px-5 p-2 text-center mb-2"
                         onClick={fileUpload}
                     >
                         画像をアップロード
@@ -404,7 +404,6 @@ const TouristAreaRegisterInputForm = (props) => {
                             type: "radio",
                             name: "selectDisplayImage",
                             value: image.fileName,
-
                             className:
                                 "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2",
                             onChange: (e) => {
@@ -428,7 +427,7 @@ const TouristAreaRegisterInputForm = (props) => {
                                 <input {...setOptionObj} />
                                 <label
                                     htmlFor="defaultRadio"
-                                    className="ml-2 text-sm font-medium text-gray-900 truncate"
+                                    className="w-1/2 ml-2 text-sm font-medium text-gray-900 truncate"
                                 >
                                     {image.fileName}
                                 </label>
