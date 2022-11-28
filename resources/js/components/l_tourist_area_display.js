@@ -34,7 +34,6 @@ const TouristAreaDisplay = (props) => {
     return (
         <Card className="w-96 border rounded-lg">
             <CardHeader
-                color="blue"
                 className="relative h-56 m-2"
                 onClick={() => console.log("モダールを開く処理を実装要")}
             >
@@ -43,7 +42,7 @@ const TouristAreaDisplay = (props) => {
                     className={"h-full w-full object-cover"}
                 />
                 <div className="absolute h-7 bottom-0 w-full bg-gradient-to-r from-neutral-400">
-                    <p className={"font-bold text-lg ml-2 truncate"}>
+                    <p className={"font-bold text-lg text-white ml-2 truncate"}>
                         {touristAreaName}
                     </p>
                 </div>
