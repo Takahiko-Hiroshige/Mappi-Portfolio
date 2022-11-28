@@ -23,6 +23,9 @@ import TouristAreaRegister from "./pages/p_tourist_area_register.js";
 const App = () => {
     return (
         <div>
+            <div className="sticky top-0 z-[999]">
+                <Header />
+            </div>
             <Routes>
                 <Route path="/" element={<IndexForDev />} />
                 <Route path="/top" element={<Top />} />
@@ -47,9 +50,6 @@ ReactDOM.render(
             <Provider store={store}>
                 <AxiosErrorHandleProvider>
                     <AxiosErrorModal />
-                    <div className="sticky top-0">
-                        <Header />
-                    </div>
                     <App />
                 </AxiosErrorHandleProvider>
             </Provider>
