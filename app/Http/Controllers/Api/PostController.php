@@ -41,8 +41,6 @@ class PostController extends Controller
             $error_code = $e->getMessage();
             $error_message = $error_code;
             return response()->json(['error' => $error_message], $this->errorCode);
-
-
         }
     }
 }

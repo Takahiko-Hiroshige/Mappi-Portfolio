@@ -23,6 +23,12 @@ const indexForDev = () => {
                 </Button>
                 <h4 className="ml-3">status::参考ページ Devloper ➡ 廣重</h4>
             </div>
+            <div className="m-3 flex">
+                <Button variant="contained" href={`/touristAreaRegister`}>
+                    削除予定::touristAreaRegisterページ
+                </Button>
+                <h4 className="ml-3">status::参考ページ Devloper ➡ 廣重</h4>
+            </div>
         </div>
     );
 };

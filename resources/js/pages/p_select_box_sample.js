@@ -38,7 +38,6 @@ const SearchBoxSample = () => {
                 setOptions(cityList);
             });
     }, []);
-
     return (
         <div>
             <div className="container">
