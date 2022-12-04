@@ -11,41 +11,59 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// const handleDelete = () => {
-//     console.warn("この機能は検索機能の際に使用予定");
-// };
-
 const CategoryChip = (props) => {
-    const { categories, size = "small", onDelete } = props;
+    const {
+        categories,
+        size = "small", // medium|small
+        onDelete, // function
+        isOutlineStyle = false,
+    } = props;
 
+    // style
     let palette = {};
-    categories.forEach((category) => {
-        palette[category.value] = {
-            main: category.color,
-            contrastText: "#FFFFFF",
-        };
-    });
-
+    if (!isOutlineStyle) {
+        categories.forEach((category) => {
+            palette[category.value] = {
+                main: category.color,
+                contrastText: "#FFFFFF",
+            };
+        });
+    } else {
+        categories.forEach((category) => {
+            palette[category.value] = {
+                main: "#FFFFFF",
+                contrastText: "#000000",
+            };
+        });
+    }
     const theme = createTheme({
         palette,
     });
 
-    const options = { size };
-    // TODO::検索機能の際だけ追加するようにする
-    // onDelete={handleDelete}
-    if (onDelete) options["onDelete"] = { ...onDelete };
+    const addOptions = {};
+    if (onDelete) addOptions["onDelete"] = onDelete;
+
     return (
         <div>
             <Stack direction="row" spacing={1}>
                 <ThemeProvider theme={theme}>
                     {categories?.map((category) => {
-                        const color = category.value;
+                        // style
+                        if (!isOutlineStyle) {
+                            addOptions["color"] = category.value;
+                        } else {
+                            addOptions["variant"] = "outlined";
+                        }
                         return (
                             <Chip
                                 key={category.value}
-                                label={category.label}
-                                color={color}
-                                {...options}
+                                size={size}
+                                label={
+                                    isOutlineStyle
+                                        ? `#${category.label}`
+                                        : category.label
+                                }
+                                {...addOptions}
                             />
                         );
                     })}

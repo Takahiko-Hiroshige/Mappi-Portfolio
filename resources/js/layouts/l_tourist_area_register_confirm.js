@@ -11,7 +11,11 @@ import React from "react";
  *import components
  */
 import ImageSwiper from "../components/c_image_slider.js";
-import TouristAreaDisplay from "../components/l_tourist_area_display.js";
+import TouristAreaDisplay from "../components/c_tourist_area_display.js";
+/**
+ *import functions
+ */
+import { getWindowSize } from "../utils/window_dimensions.js";
 
 const TouristAreaRegisterConfirm = (props) => {
     const {
@@ -23,9 +27,15 @@ const TouristAreaRegisterConfirm = (props) => {
         categoryListSelectValue,
     } = props;
 
+    const windowWidth = getWindowSize().width;
+    const mulValue = windowWidth > 900 ? 1.5 : 2;
+
     return (
-        <div className="w-[90%] m-5">
-            <div className="mb-24 flex justify-center items-center">
+        <div className="w-[90%] mt-3">
+            <p className="flex justify-center items-center">
+                ※表示させる端末などで表示状態は変動します
+            </p>
+            <div className="mb-5 flex justify-center items-center">
                 <TouristAreaDisplay
                     image={displayImage.filePath || imageArray[0]?.filePath}
                     touristAreaName={touristAreaName}
@@ -34,14 +44,15 @@ const TouristAreaRegisterConfirm = (props) => {
                     categoryListSelectValue={categoryListSelectValue}
                 />
             </div>
-            <div className="flex justify-center items-center">
+            <div
+                className="flex justify-center items-center mb-5"
+                hidden={windowWidth <= 550}
+            >
                 <ImageSwiper
                     imageArray={imageArray}
-                    imageSize={2.0}
-                    optionsProps={{
-                        slidesPerView: 2,
-                        autoplay: { isAutoplay: true },
-                    }}
+                    displayPattern="wide"
+                    multiplication={true}
+                    mulValue={mulValue}
                 />
             </div>
         </div>

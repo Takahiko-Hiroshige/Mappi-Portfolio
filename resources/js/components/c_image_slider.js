@@ -6,7 +6,7 @@
 /**
  *import Library
  */
-import React from "react";
+import React, { useEffect } from "react";
 import SwiperCore, {
     EffectCoverflow,
     Pagination,
@@ -25,21 +25,57 @@ SwiperCore.use([EffectCoverflow, Pagination, Navigation, Autoplay]);
 
 const ImageSwiper = (props) => {
     const {
-        imageSize /**【必須】画像サイズ */,
+        displayPattern = "normal" /**normal|wide */,
+        width = 860,
+        height = 532,
+        multiplication = false /**掛け算 */,
+        mulValue /**乗数 */,
+        division = false /**割り算 */,
+        divValue /**除数 */,
         imageArray /**【必須】画像 型:配列 */,
-        optionsProps,
+        optionsProps = {},
     } = props;
 
+    if (displayPattern !== "normal" && displayPattern !== "wide") {
+        console.error(
+            "displayPatternは[normal]または[wide]のどちらかを選択してください"
+        );
+        return;
+    }
     const {
         speed = 1000 /**スライド速度 */,
-        slidesPerView = 2 /**表示枚数 （例）2の場合: 0.5 1.0 0.5形式で表示 */,
         spaceBetween = 10 /**画像同士の間隔 */,
-        autoplay,
+        autoplay = {},
     } = optionsProps;
 
-    /**黄金比 */
-    const width = 860 / imageSize;
-    const height = 532 / imageSize / 2;
+    let normalPatternSize = {};
+    let widePatternSize = {};
+
+    if (multiplication) {
+        normalPatternSize = {
+            width: width / mulValue,
+            height: height / mulValue,
+        };
+        widePatternSize = {
+            width: width / mulValue,
+            height: height / mulValue / 2,
+        };
+    } else if (division) {
+        normalPatternSize = {
+            width: width * divValue,
+            height: height * divValue,
+        };
+        widePatternSize = {
+            width: width * divValue,
+            height: (height * divValue) / 2,
+        };
+    } else {
+        normalPatternSize = { width, height };
+        widePatternSize = { width, height };
+    }
+
+    const { width: setWidth, height: setHeight } =
+        displayPattern === "normal" ? normalPatternSize : widePatternSize;
 
     const {
         isAutoplay = false /**自動スクロール判定*/,
@@ -49,7 +85,7 @@ const ImageSwiper = (props) => {
     const options = {
         init: true,
         speed: speed,
-        slidesPerView: slidesPerView,
+        slidesPerView: displayPattern === "normal" ? 1 : 2,
         spaceBetween: spaceBetween,
         loop: true,
         paginationclickable: "true",
@@ -71,6 +107,8 @@ const ImageSwiper = (props) => {
             nextButton: ".swiper-button-next",
             prevButton: ".swiper-button-prev",
         },
+        observer: true,
+        observeParents: true,
         className: "mySwiper",
     };
 
@@ -82,8 +120,8 @@ const ImageSwiper = (props) => {
     }
 
     const sliderBoxStyle = {
-        width: `${width}px`,
-        height: `${height}px`,
+        width: `${setWidth}px`,
+        height: `${setHeight}px`,
     };
 
     return (

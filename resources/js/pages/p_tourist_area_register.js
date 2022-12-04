@@ -1,4 +1,4 @@
-/*TODO::レスポンシブ対応が難しいため表示方法を検討中*
+/*
  *Created:T.HIROSHIGE
  *Created At:2022/11/20
  */
@@ -7,6 +7,9 @@
  *import Library
  */
 import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 /**
  *import components
  */
@@ -14,6 +17,7 @@ import TouristAreaRegisterInputForm from "../layouts/l_tourist_area_register_inp
 import TouristAreaRegisterConfirm from "../layouts/l_tourist_area_register_confirm.js";
 
 const TouristAreaRegister = () => {
+    const [selectDisplayValue, setSelectDisplayValue] = useState(0);
     const [imageArray, setImageArray] = useState([]);
     const [displayImage, setDisplayImage] = useState("");
     const [touristAreaName, setTouristAreaName] = useState("");
@@ -21,11 +25,28 @@ const TouristAreaRegister = () => {
     const [touristAreaDeTail, setTouristAreaDeTail] = useState("");
     const [categoryListSelectValue, setCategoryListSelectValue] = useState([]);
 
+    const handleChangeDisplay = (e, displayValue) => {
+        setSelectDisplayValue(displayValue);
+    };
+
     return (
         <div>
-            <div className="flex mt-3">
+            <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+                <Tabs
+                    value={selectDisplayValue}
+                    onChange={handleChangeDisplay}
+                    centered
+                >
+                    <Tab label="入力フォーム" />
+                    <Tab label="サンプル" />
+                </Tabs>
+            </Box>
+            <div className="mt-3">
                 {/* 入力フォーム@観光地登録画面 */}
-                <div className="flex w-1/2 justify-end mr-5 ml-3">
+                <div
+                    className="flex justify-center items-center"
+                    hidden={selectDisplayValue !== 0}
+                >
                     <TouristAreaRegisterInputForm
                         displayImage={displayImage}
                         setDisplayImage={setDisplayImage}
@@ -41,8 +62,10 @@ const TouristAreaRegister = () => {
                         setCategoryListSelectValue={setCategoryListSelectValue}
                     />
                 </div>
-                {/* イメージ@観光地登録画面 */}
-                <div className="flex w-1/2 justify-start ml-5 mr-3">
+                <div
+                    className="flex justify-center items-center"
+                    hidden={selectDisplayValue !== 1}
+                >
                     <TouristAreaRegisterConfirm
                         displayImage={displayImage}
                         imageArray={imageArray}
@@ -58,4 +81,3 @@ const TouristAreaRegister = () => {
 };
 
 export default TouristAreaRegister;
-// flex-1 h-screen w-screen flex justify-center items-center

@@ -191,40 +191,8 @@ const TouristAreaRegisterInputForm = (props) => {
         // console.warn(submitDataObj);
     };
     return (
-        <div className="w-[90%] h-full">
-            <div className="flex justify-center h-10 mb-2">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-7 h-7 mt-2"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                    />
-                </svg>
-                <h3 className="p-2 text-stone-900 w-60">観光地登録</h3>
-
-                <div className="flex w-full justify-end">
-                    <button
-                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                        onClick={onClickSubmitButton()}
-                    >
-                        下書き保存
-                    </button>
-                    <button
-                        className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                        onClick={onClickSubmitButton()}
-                    >
-                        投稿
-                    </button>
-                </div>
-            </div>
-            <div className="w-full h-[43rem] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-scroll">
+        <div className="w-[80%] max-w-[40rem]">
+            <div className="w-full min-w-[19rem] h-[48rem] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-scroll">
                 <div className="mb-3">
                     <label
                         htmlFor="touristAreaName"
@@ -242,16 +210,20 @@ const TouristAreaRegisterInputForm = (props) => {
                         }}
                     />
                 </div>
-                <div className="flex">
-                    <div className="w-68 mb-2">
-                        <div className="flex">
-                            <label
-                                htmlFor="postCode"
-                                className="ml-1 block mb-2 text-sm font-medium text-gray-900 text-black"
-                            >
-                                ➤郵便番号（- ハイフン不要）
-                            </label>
-                        </div>
+                <div className="mb-2">
+                    <label
+                        htmlFor="postCode"
+                        className="ml-1 block mb-2 text-sm font-medium text-gray-900 text-black"
+                    >
+                        ➤郵便番号（- ハイフン不要）
+                    </label>
+                    <p
+                        hidden={isHiddenNotFoundAddressErrorMessage}
+                        className="ml-3 mb-1 text-sm font-medium text-red-600"
+                    >
+                        {notFoundAddressErrorMessage}
+                    </p>
+                    <div className="flex">
                         <input
                             type="tel"
                             className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
@@ -267,22 +239,14 @@ const TouristAreaRegisterInputForm = (props) => {
                                 }
                             }}
                         />
-                    </div>
-                    <div className="ml-3">
                         <button
-                            className="w-32 bg-blue-700 hover:bg-blue-600 text-white rounded px-4 py-2 mt-7"
+                            className="w-32 ml-3 bg-blue-700 hover:bg-blue-600 text-white rounded px-2 py-2"
                             onClick={() => onClickPostalButton()}
                         >
                             住所検索
                         </button>
                     </div>
                 </div>
-                <p
-                    hidden={isHiddenNotFoundAddressErrorMessage}
-                    className="ml-3 mb-3 text-sm font-medium text-red-600"
-                >
-                    {notFoundAddressErrorMessage}
-                </p>
                 <div className="flex w-full mb-2">
                     <div className="w-1/2">
                         <label
@@ -374,7 +338,7 @@ const TouristAreaRegisterInputForm = (props) => {
                     />
                     <button
                         type="button"
-                        className="text-white bg-sky-400 hover:bg-sky-200 font-medium rounded-full text-sm px-5 p-2 text-center mb-2"
+                        className="ml-1 text-white bg-sky-400 hover:bg-sky-200 font-medium rounded-full text-sm px-3 p-2 text-center mb-2"
                         onClick={fileUpload}
                     >
                         画像をアップロード
@@ -427,7 +391,7 @@ const TouristAreaRegisterInputForm = (props) => {
                                 <input {...setOptionObj} />
                                 <label
                                     htmlFor="defaultRadio"
-                                    className="w-1/2 ml-2 text-sm font-medium text-gray-900 truncate"
+                                    className="w-80 ml-2 text-sm font-medium text-gray-900 truncate"
                                 >
                                     {image.fileName}
                                 </label>
@@ -522,6 +486,20 @@ const TouristAreaRegisterInputForm = (props) => {
                         }}
                     />
                 </div>
+            </div>
+            <div className="flex justify-end mt-3 mb-3">
+                <button
+                    className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded text-sm"
+                    onClick={onClickSubmitButton()}
+                >
+                    下書き保存
+                </button>
+                <button
+                    className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded text-sm"
+                    onClick={onClickSubmitButton()}
+                >
+                    投稿
+                </button>
             </div>
         </div>
     );
