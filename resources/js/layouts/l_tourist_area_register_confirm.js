@@ -8,16 +8,24 @@
  */
 import React from "react";
 /**
+ *ReduxTools
+ */
+import { useSelector } from "react-redux";
+/**
  *import components
  */
 import ImageSwiper from "../components/c_image_slider.js";
 import TouristAreaDisplay from "../components/c_tourist_area_display.js";
 /**
- *import functions
+ *import custom_hooks
  */
-import { getWindowSize } from "../utils/window_dimensions.js";
+import { useWindow } from "../utils/custom_hooks/useWindow.js";
 
-const TouristAreaRegisterConfirm = (props) => {
+const TouristAreaRegisterConfirm = () => {
+    // storeを監視
+    const touristAreaRegisterData = useSelector(
+        (state) => state.touristAreaRegisterData.value
+    );
     const {
         displayImage,
         imageArray,
@@ -25,10 +33,26 @@ const TouristAreaRegisterConfirm = (props) => {
         touristAreaCatchPhrase,
         touristAreaDeTail,
         categoryListSelectValue,
-    } = props;
+        cityListSelectValue,
+        cityListOptions,
+        postal,
+        numberAddress,
+        otherAddress,
+        phoneNumber,
+        relationUrl,
+    } = touristAreaRegisterData;
 
-    const windowWidth = getWindowSize().width;
-    const mulValue = windowWidth > 900 ? 1.5 : 2;
+    // TODO::端末ごとに変数で値を定義させる
+    const windowSize = useWindow();
+    const windowWidthSize = windowSize.width;
+    let mulValue = 1;
+    if (windowWidthSize > 900) {
+        mulValue = 1.5;
+    } else if (windowWidthSize < 900 && windowWidthSize > 500) {
+        mulValue = 2.0;
+    } else if (windowWidthSize < 500) {
+        mulValue = 2.5;
+    }
 
     return (
         <div className="w-[90%] mt-3">
@@ -37,17 +61,22 @@ const TouristAreaRegisterConfirm = (props) => {
             </p>
             <div className="mb-5 flex justify-center items-center">
                 <TouristAreaDisplay
-                    image={displayImage.filePath || imageArray[0]?.filePath}
+                    image={displayImage?.filePath || imageArray[0]?.filePath}
+                    imageArray={imageArray}
                     touristAreaName={touristAreaName}
                     touristAreaCatchPhrase={touristAreaCatchPhrase}
                     touristAreaDeTail={touristAreaDeTail}
                     categoryListSelectValue={categoryListSelectValue}
+                    cityListSelectValue={cityListSelectValue}
+                    cityListOptions={cityListOptions}
+                    postal={postal}
+                    numberAddress={numberAddress}
+                    otherAddress={otherAddress}
+                    phoneNumber={phoneNumber}
+                    relationUrl={relationUrl}
                 />
             </div>
-            <div
-                className="flex justify-center items-center mb-5"
-                hidden={windowWidth <= 550}
-            >
+            <div className="flex justify-center items-center mb-5">
                 <ImageSwiper
                     imageArray={imageArray}
                     displayPattern="wide"

@@ -2,6 +2,9 @@
  *Created:T.HIROSHIGE
  *Created At:2022/11/01
  */
+/**
+ * backend側によるAPI処理でエラー発生した際にエラー表示させる
+ */
 import React from "react";
 import { ErrorEvent } from "../redux/slices/axios_error_slice.js";
 import { useDispatch } from "react-redux";
@@ -47,7 +50,7 @@ const axiosErrorModal = () => {
                                         type="button"
                                         onClick={() => dispatch(ErrorEvent())}
                                     >
-                                        Close
+                                        閉じる
                                     </button>
                                 </div>
                             </div>
