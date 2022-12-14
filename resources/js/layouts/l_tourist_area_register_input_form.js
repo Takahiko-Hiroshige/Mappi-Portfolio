@@ -9,53 +9,86 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 /**
+ *ReduxTools
+ */
+import { useDispatch } from "react-redux";
+import { setTouristAreaRegisterData } from "../redux/slices/tourist_area_register_data_slice.js";
+/**
  *import components
  */
 import SelectBox from "../components/common/c_select_box.js";
 
-const TouristAreaRegisterInputForm = (props) => {
-    const {
-        displayImage,
-        setDisplayImage,
-        imageArray,
-        setImageArray,
-        touristAreaName,
-        setTouristAreaName,
-        touristAreaCatchPhrase,
-        setTouristAreaCatchPhrase,
-        touristAreaDeTail,
-        setTouristAreaDeTail,
-        categoryListSelectValue,
-        setCategoryListSelectValue,
-    } = props;
-
-    const area = "福岡県";
+const TouristAreaRegisterInputForm = () => {
+    const [imageArray, setImageArray] = useState([]);
+    const [displayImage, setDisplayImage] = useState("");
+    const [touristAreaName, setTouristAreaName] = useState("");
+    const [touristAreaCatchPhrase, setTouristAreaCatchPhrase] = useState("");
+    const [touristAreaDeTail, setTouristAreaDeTail] = useState("");
+    const [categoryListSelectValue, setCategoryListSelectValue] = useState([]);
     const [cityListSelectValue, setCityListSelectValue] = useState([]);
     const [cityListOptions, setCityListOptions] = useState([]);
     const [postal, setPostal] = useState("");
     const [numberAddress, setNumberAddress] = useState("");
     const [otherAddress, setOtherAddress] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [
-        isHiddenNotFoundAddressErrorMessage,
-        setIsHiddenNotFoundAddressErrorMessage,
-    ] = useState(true);
-    const [notFoundAddressErrorMessage, setNotFoundAddressErrorMessage] =
-        useState("");
-    const [
-        isHiddenInputSameFileErrorMessage,
-        setIsHiddenInputSameFileErrorMessage,
-    ] = useState(true);
-    const [inputSameFileErrorMessage, setInputSameFileErrorMessage] =
-        useState("");
+    const [relationUrl, setRelationUrl] = useState("");
+    // 画像エラー
+    const [isHiddenInputFileErrorMessage, setIsHiddenInputFileErrorMessage] =
+        useState(true);
+    const [inputFileErrorMessage, setInputFileErrorMessage] = useState("");
     const [isHiddenDeleteFileErrorMessage, setIsHiddenDeleteFileErrorMessage] =
         useState(true);
     const [deleteFileErrorMessage, setDeleteFileErrorMessage] = useState("");
+    // 郵便番号エラー
+    const [isHiddenPostalErrorMessage, setisHiddenPostalErrorMessage] =
+        useState(true);
+    const [postalErrorMessage, setPostalErrorMessage] = useState("");
+    // 電話番号エラー
+    const [
+        isHiddenPhoneNumberErrorMessage,
+        setIsHiddenPhoneNumberErrorMessage,
+    ] = useState(true);
+    const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
 
     const inputRef = useRef(null);
 
+    // 各state更新すると同時にStoreを更新
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(
+            setTouristAreaRegisterData({
+                imageArray,
+                touristAreaName,
+                touristAreaCatchPhrase,
+                touristAreaDeTail,
+                categoryListSelectValue,
+                cityListSelectValue,
+                cityListOptions,
+                postal,
+                numberAddress,
+                otherAddress,
+                phoneNumber,
+                relationUrl,
+            })
+        );
+    }, [
+        imageArray,
+        touristAreaName,
+        touristAreaCatchPhrase,
+        touristAreaDeTail,
+        categoryListSelectValue,
+        cityListSelectValue,
+        cityListOptions,
+        postal,
+        numberAddress,
+        otherAddress,
+        phoneNumber,
+        relationUrl,
+    ]);
+
     // 福岡県の市町村を取得[API]
     useEffect(() => {
+        const area = "福岡県";
         axios
             .get(
                 `http://geoapi.heartrails.com/api/json?method=getCities&prefecture=${area}`
@@ -89,39 +122,43 @@ const TouristAreaRegisterInputForm = (props) => {
     ];
 
     // 郵便番号にて住所特定[API]
-    const onClickPostalButton = () => {
-        if (postal === "") {
-            setIsHiddenNotFoundAddressErrorMessage(false);
-            setNotFoundAddressErrorMessage("郵便番号が入力されていません");
+    const onClickPostalButton = (e) => {
+        if (e.target.value === "") {
+            setisHiddenPostalErrorMessage(false);
+            setPostalErrorMessage("郵便番号が入力されていません");
+            return;
+        }
+        if (!/^[0-9]+$/.test(e.target.value)) {
+            setisHiddenPostalErrorMessage(false);
+            setPostalErrorMessage("半角数字のみ入力してください");
             return;
         }
         axios
             .get(
-                `http://geoapi.heartrails.com/api/json?method=searchByPostal&postal=${postal}`
+                `http://geoapi.heartrails.com/api/json?method=searchByPostal&postal=${e.target.value}`
             )
             .then((res) => {
                 const setCity = cityListOptions.find(
                     (item) => item.value === res.data.response.location[0].city
                 );
                 if (!setCity) {
-                    setIsHiddenNotFoundAddressErrorMessage(false);
-                    setNotFoundAddressErrorMessage(
+                    setisHiddenPostalErrorMessage(false);
+                    setPostalErrorMessage(
                         "入力された郵便番号は福岡県内に存在しません"
                     );
                     return;
                 }
+                setPostal(e.target.value);
                 setCityListSelectValue(setCity);
                 const setTown = res.data.response.location[0].town;
                 if (setTown !== "（その他）") {
                     setNumberAddress(setTown);
                 }
-                setIsHiddenNotFoundAddressErrorMessage(true);
+                setisHiddenPostalErrorMessage(true);
             })
             .catch(() => {
-                setIsHiddenNotFoundAddressErrorMessage(false);
-                setNotFoundAddressErrorMessage(
-                    "入力された郵便番号は存在しません"
-                );
+                setisHiddenPostalErrorMessage(false);
+                setPostalErrorMessage("入力された郵便番号は存在しません");
             });
     };
 
@@ -133,25 +170,47 @@ const TouristAreaRegisterInputForm = (props) => {
     };
 
     const onFileInputChange = (e) => {
-        if (!e.target.files || e.target.files.length === 0) return;
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
         const fileObject = e.target.files[0];
+        if (!/image/.test(fileObject.type)) {
+            setIsHiddenInputFileErrorMessage(false);
+            setInputFileErrorMessage("画像以外のファイルは選択できません");
+            return;
+        }
         const fileName = fileObject.name.replace("C:\fakepath", "");
         if (imageArray.some((image) => image.fileName === fileName)) {
-            setIsHiddenInputSameFileErrorMessage(false);
-            setInputSameFileErrorMessage("同じ名前のファイルは選択できません");
+            setIsHiddenInputFileErrorMessage(false);
+            setInputFileErrorMessage("同じ名前のファイルは選択できません");
             e.target.value = "";
             return;
         }
-        setImageArray([
+        const setArray = [
             ...imageArray,
             {
                 fileName: fileName,
                 filePath: window.URL.createObjectURL(fileObject),
             },
-        ]);
-        setIsHiddenInputSameFileErrorMessage(true);
+        ];
+        setImageArray(setArray);
+        setIsHiddenInputFileErrorMessage(true);
         setIsHiddenDeleteFileErrorMessage(true);
         e.target.value = "";
+    };
+
+    const setNumberState = (
+        e,
+        setState,
+        setErrorMessage,
+        setIsHiddenErrorMessage
+    ) => {
+        if (/^[0-9]+$/.test(e.target.value)) {
+            setState(e.target.value);
+            setIsHiddenErrorMessage(true);
+        } else {
+            setErrorMessage("半角数字のみ入力してください");
+            setIsHiddenErrorMessage(false);
+        }
     };
 
     const onClickDeleteFileButton = (image) => {
@@ -166,7 +225,7 @@ const TouristAreaRegisterInputForm = (props) => {
         URL.revokeObjectURL(image.filePath);
         setImageArray([...onAfterDeleteFileImageArray]);
         setIsHiddenDeleteFileErrorMessage(true);
-        setIsHiddenInputSameFileErrorMessage(true);
+        setIsHiddenInputFileErrorMessage(true);
     };
 
     const fileUpload = () => {
@@ -187,12 +246,13 @@ const TouristAreaRegisterInputForm = (props) => {
             categoryListSelectValue,
             touristAreaCatchPhrase,
             touristAreaDeTail,
+            relationUrl,
         };
         // console.warn(submitDataObj);
     };
     return (
         <div className="w-[80%] max-w-[40rem]">
-            <div className="w-full min-w-[19rem] h-[48rem] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-scroll">
+            <div className="w-full min-w-[19rem] h-[48rem] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-auto">
                 <div className="mb-3">
                     <label
                         htmlFor="touristAreaName"
@@ -218,10 +278,10 @@ const TouristAreaRegisterInputForm = (props) => {
                         ➤郵便番号（- ハイフン不要）
                     </label>
                     <p
-                        hidden={isHiddenNotFoundAddressErrorMessage}
+                        hidden={isHiddenPostalErrorMessage}
                         className="ml-3 mb-1 text-sm font-medium text-red-600"
                     >
-                        {notFoundAddressErrorMessage}
+                        {postalErrorMessage}
                     </p>
                     <div className="flex">
                         <input
@@ -230,18 +290,24 @@ const TouristAreaRegisterInputForm = (props) => {
                             placeholder="例）0000000"
                             required
                             onChange={(e) => {
-                                setPostal(e.target.value);
-                                setIsHiddenNotFoundAddressErrorMessage(true);
+                                e.target.value === ""
+                                    ? setisHiddenPostalErrorMessage(true)
+                                    : setNumberState(
+                                          e,
+                                          setPostal,
+                                          setPostalErrorMessage,
+                                          setisHiddenPostalErrorMessage
+                                      );
                             }}
-                            onKeyPress={(e) => {
+                            onKeyDown={(e) => {
                                 if (e.key === "Enter") {
-                                    onClickPostalButton();
+                                    onClickPostalButton(e);
                                 }
                             }}
                         />
                         <button
                             className="w-32 ml-3 bg-blue-700 hover:bg-blue-600 text-white rounded px-2 py-2"
-                            onClick={() => onClickPostalButton()}
+                            onClick={() => onClickPostalButton(e)}
                         >
                             住所検索
                         </button>
@@ -297,7 +363,7 @@ const TouristAreaRegisterInputForm = (props) => {
                         type="text"
                         id="touristAreaCatchPhrase"
                         className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
-                        placeholder="例）建物・マンション名　〇号室"
+                        placeholder="例）建物・マンション名"
                         required
                         onChange={(e) => {
                             setOtherAddress(e.target.value);
@@ -311,13 +377,26 @@ const TouristAreaRegisterInputForm = (props) => {
                     >
                         ➤電話番号（- ハイフン不要）
                     </label>
+                    <p
+                        hidden={isHiddenPhoneNumberErrorMessage}
+                        className="ml-3 mb-1 text-sm font-medium text-red-600"
+                    >
+                        {phoneNumberErrorMessage}
+                    </p>
                     <input
                         type="tel"
                         className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）00000000000"
                         required
                         onChange={(e) => {
-                            setPhoneNumber(e.target.value);
+                            e.target.value === ""
+                                ? setIsHiddenPhoneNumberErrorMessage(true)
+                                : setNumberState(
+                                      e,
+                                      setPhoneNumber,
+                                      setPhoneNumberErrorMessage,
+                                      setIsHiddenPhoneNumberErrorMessage
+                                  );
                         }}
                     />
                 </div>
@@ -344,10 +423,10 @@ const TouristAreaRegisterInputForm = (props) => {
                         画像をアップロード
                     </button>
                     <p
-                        hidden={isHiddenInputSameFileErrorMessage}
+                        hidden={isHiddenInputFileErrorMessage}
                         className="ml-3 mb-3 text-sm font-medium text-red-600"
                     >
-                        {inputSameFileErrorMessage}
+                        {inputFileErrorMessage}
                     </p>
                     <label
                         hidden={imageArray.length === 0}
@@ -470,19 +549,19 @@ const TouristAreaRegisterInputForm = (props) => {
                 </div>
                 <div className="w-full mb-3">
                     <label
-                        htmlFor="touristAreaCatchPhrase"
+                        htmlFor="touristAreaRelationUrl"
                         className="ml-1 block mb-2 text-sm font-medium text-gray-900"
                     >
                         ➤関連サイトURL
                     </label>
                     <input
                         type="text"
-                        id="touristAreaCatchPhrase"
+                        id="touristAreaRelationUrl"
                         className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                         placeholder="例）https://mappi.com/"
                         required
                         onChange={(e) => {
-                            setOtherAddress(e.target.value);
+                            setRelationUrl(e.target.value);
                         }}
                     />
                 </div>

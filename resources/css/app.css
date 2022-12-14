@@ -9,7 +9,7 @@
 .swiper-button-next,
 .swiper-button-prev {
     --swiper-navigation-color: #808080!important;
-    --swiper-navigation-size:20px!important;
+    --swiper-navigation-size:30px!important;
 }
 /* ページネーションのサイズと色 */
 span.swiper-pagination-bullet.swiper-pagination-bullet-active {

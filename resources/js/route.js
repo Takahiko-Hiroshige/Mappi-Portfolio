@@ -5,11 +5,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ErrorBoundary from "./utils/error_boundary.js";
+import ErrorBoundary from "./error_boundary.js";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import AxiosErrorModal from "./modals/axios_error_modal.js";
-import { AxiosErrorHandleProvider } from "./utils/axios_error_handler.js";
+import AxiosErrorModal from "./modals/m_axios_error_modal.js";
+import { AxiosErrorHandleProvider } from "./axios_error_handler.js";
 import Header from "./components/c_header";
 /**
  * page component

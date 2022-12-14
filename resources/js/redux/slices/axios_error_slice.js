@@ -32,7 +32,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialStateObj = {
     isOpen: false,
-    
     status: "",
     statusText: "",
     errorInfo: "",

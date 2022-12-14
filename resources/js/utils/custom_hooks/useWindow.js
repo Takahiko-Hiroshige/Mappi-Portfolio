@@ -2,9 +2,12 @@
  *Created:T.HIROSHIGE
  *Created At:2022/12/04
  */
+/**
+ * windowのサイズを取得
+ */
 import { useState, useEffect } from "react";
 
-export const getWindowSize = () => {
+export const useWindow = () => {
     const getWindowDimensions = () => {
         const { innerWidth: width, innerHeight: height } = window;
         return {
