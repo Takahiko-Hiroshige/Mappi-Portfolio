@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocoder from "react-native-geocoding";
 
-const apiKey = "AIzaSyBLtufiSkb4dE3Xtk2rwPQl7mAPGFdnt0E";
+const apiKey = process.env.MIX_GOGGLE_API;
 
 const containerStyle = {
     width: "100%",
