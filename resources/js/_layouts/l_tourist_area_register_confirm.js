@@ -14,8 +14,8 @@ import { useSelector } from "react-redux";
 /**
  *import components
  */
-import ImageSwiper from "../components/c_image_slider.js";
-import TouristAreaDisplay from "../components/c_tourist_area_display.js";
+import ImageSwiper from "../_components/c_image_slider.js";
+import TouristAreaDisplay from "../_components/c_tourist_area_display.js";
 /**
  *import custom_hooks
  */
@@ -31,7 +31,7 @@ const TouristAreaRegisterConfirm = () => {
         imageArray,
         touristAreaName,
         touristAreaCatchPhrase,
-        touristAreaDeTail,
+        touristAreaDetail,
         categoryListSelectValue,
         cityListSelectValue,
         cityListOptions,
@@ -65,7 +65,7 @@ const TouristAreaRegisterConfirm = () => {
                     imageArray={imageArray}
                     touristAreaName={touristAreaName}
                     touristAreaCatchPhrase={touristAreaCatchPhrase}
-                    touristAreaDeTail={touristAreaDeTail}
+                    touristAreaDetail={touristAreaDetail}
                     categoryListSelectValue={categoryListSelectValue}
                     cityListSelectValue={cityListSelectValue}
                     cityListOptions={cityListOptions}

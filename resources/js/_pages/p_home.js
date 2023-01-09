@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import TouristAreaList from "../layouts/l_tourist_area_list.js";
+import TouristAreaList from "../_layouts/l_tourist_area_list.js";
 
 const home = () => {
     return (

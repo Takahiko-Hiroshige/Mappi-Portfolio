@@ -21,29 +21,26 @@ const selectBox = (props) => {
         value /*【必須】*選択値*/,
         getOptionValue /*【必須】*検索一致ワード設定*/,
         placeholder /**プレースホルダー */,
-        setSelectValue /*【必須】*useStateのセット関数*/,
+        onChange = () => {},
     } = props;
+
+    const optionProps = {
+        isDisabled,
+        isLoading,
+        isClearable,
+        isRtl,
+        isSearchable,
+        isMulti,
+        options,
+        value,
+        placeholder,
+        getOptionValue,
+        onChange,
+    };
 
     return (
         <div>
-            <Select
-                isDisabled={isDisabled}
-                isLoading={isLoading}
-                isClearable={isClearable}
-                isRtl={isRtl}
-                isSearchable={isSearchable}
-                isMulti={isMulti}
-                options={options}
-                value={value}
-                placeholder={placeholder}
-                getOptionValue={getOptionValue}
-                /**
-                 * ※isMulti=trueの場合、eventは配列
-                 */
-                onChange={(e) => {
-                    setSelectValue(e);
-                }}
-            />
+            <Select {...optionProps} />
         </div>
     );
 };

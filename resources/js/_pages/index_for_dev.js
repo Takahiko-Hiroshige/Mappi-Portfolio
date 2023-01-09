@@ -18,12 +18,6 @@ const indexForDev = () => {
                 <h4 className="ml-3">status::未着手 Devloper ➡ </h4>
             </div>
             <div className="m-3 flex">
-                <Button variant="contained" href={`/searchBoxSample`}>
-                    削除予定::searchBoxSampleページ
-                </Button>
-                <h4 className="ml-3">status::参考ページ Devloper ➡ 廣重</h4>
-            </div>
-            <div className="m-3 flex">
                 <Button variant="contained" href={`/touristAreaRegister`}>
                     削除予定::touristAreaRegisterページ
                 </Button>

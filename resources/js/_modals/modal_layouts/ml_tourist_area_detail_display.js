@@ -9,8 +9,8 @@ import React from "react";
 /**
  *import components
  */
-import ImageSwiper from "../../components/c_image_slider.js";
-import CategoryChip from "../../components/common/c_category_chip.js";
+import ImageSwiper from "../../_components/c_image_slider.js";
+import CategoryChip from "../../_components/common/c_category_chip.js";
 /**
  *import functions
  */
@@ -22,7 +22,7 @@ const TouristAreaDitailDisplay = (props) => {
         imageArray,
         touristAreaName,
         touristAreaCatchPhrase,
-        touristAreaDeTail,
+        touristAreaDetail,
         categoryListSelectValue,
         cityListSelectValue,
         postal,
@@ -117,7 +117,7 @@ const TouristAreaDitailDisplay = (props) => {
                                 ➤観光地概要
                             </label>
                             <p className="whitespace-pre-wrap ml-3 text-gray-600">
-                                {touristAreaDeTail}
+                                {touristAreaDetail}
                             </p>
                         </div>
                         <div>

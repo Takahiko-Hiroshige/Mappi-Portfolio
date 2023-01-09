@@ -13,7 +13,7 @@ import Tab from "@mui/material/Tab";
  *import components
  */
 import TouristAreaDitailDisplay from "./modal_layouts/ml_tourist_area_detail_display.js";
-import Map from "../modals/modal_layouts/ml_tourist_area_detail_map.js";
+import Map from "./modal_layouts/ml_tourist_area_detail_map.js";
 
 const TouristAreaDitailModal = (props) => {
     const {
@@ -21,7 +21,7 @@ const TouristAreaDitailModal = (props) => {
         imageArray,
         touristAreaName,
         touristAreaCatchPhrase,
-        touristAreaDeTail,
+        touristAreaDetail,
         categoryListSelectValue,
         cityListSelectValue,
         cityListOptions,
@@ -62,7 +62,7 @@ const TouristAreaDitailModal = (props) => {
                     imageArray={imageArray}
                     touristAreaName={touristAreaName}
                     touristAreaCatchPhrase={touristAreaCatchPhrase}
-                    touristAreaDeTail={touristAreaDeTail}
+                    touristAreaDetail={touristAreaDetail}
                     categoryListSelectValue={categoryListSelectValue}
                     cityListSelectValue={cityListSelectValue}
                     cityListOptions={cityListOptions}
