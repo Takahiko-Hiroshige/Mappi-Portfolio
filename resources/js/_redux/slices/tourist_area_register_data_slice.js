@@ -9,7 +9,7 @@ const initialStateObj = {
     imageArray: [],
     touristAreaName: "",
     touristAreaCatchPhrase: "",
-    touristAreaDeTail: "",
+    touristAreaDetail: "",
     categoryListSelectValue: [],
     cityListSelectValue: "",
     postal: "",

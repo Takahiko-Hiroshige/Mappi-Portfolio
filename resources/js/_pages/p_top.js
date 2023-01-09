@@ -13,10 +13,10 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 /**
  *import components
  */
-import MainTable from "../components/c_main_table";
-import PostForm from "../components/c_post_form";
-import Header from "../components/c_header";
-import MainFeaturedPost from "../components/c_main_featured_post";
+import MainTable from "../_components/c_main_table";
+import PostForm from "../_components/c_post_form";
+import Header from "../_components/c_header";
+import MainFeaturedPost from "../_components/c_main_featured_post";
 import images from "/var/www/html/public/images/justin-hu-ljGiASOhUOU-unsplash.jpg";
 
 //スタイルの定義

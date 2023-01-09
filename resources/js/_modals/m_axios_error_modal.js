@@ -6,7 +6,7 @@
  * backend側によるAPI処理でエラー発生した際にエラー表示させる
  */
 import React from "react";
-import { ErrorEvent } from "../redux/slices/axios_error_slice.js";
+import { ErrorEvent } from "../_redux/slices/axios_error_slice.js";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 

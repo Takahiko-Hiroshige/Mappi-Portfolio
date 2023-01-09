@@ -13,8 +13,8 @@ import Tab from "@mui/material/Tab";
 /**
  *import components
  */
-import TouristAreaRegisterInputForm from "../layouts/l_tourist_area_register_input_form.js";
-import TouristAreaRegisterConfirm from "../layouts/l_tourist_area_register_confirm.js";
+import TouristAreaRegisterInputForm from "../_layouts/l_tourist_area_register_input_form.js";
+import TouristAreaRegisterConfirm from "../_layouts/l_tourist_area_register_confirm.js";
 
 const TouristAreaRegister = () => {
     const [selectDisplayValue, setSelectDisplayValue] = useState(0);

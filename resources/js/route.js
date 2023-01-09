@@ -7,18 +7,17 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./error_boundary.js";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import AxiosErrorModal from "./modals/m_axios_error_modal.js";
+import { store } from "./_redux/store";
+import AxiosErrorModal from "./_modals/m_axios_error_modal.js";
 import { AxiosErrorHandleProvider } from "./axios_error_handler.js";
-import Header from "./components/c_header";
+import Header from "./_components/c_header";
 /**
  * page component
  */
-import IndexForDev from "./pages/index_for_dev.js";
-import Top from "./pages/p_top.js";
-import Home from "./pages/p_home.js";
-import SearchBoxSample from "./pages/p_select_box_sample.js";
-import TouristAreaRegister from "./pages/p_tourist_area_register.js";
+import IndexForDev from "./_pages/index_for_dev.js";
+import Top from "./_pages/p_top.js";
+import Home from "./_pages/p_home.js";
+import TouristAreaRegister from "./_pages/p_tourist_area_register.js";
 
 const App = () => {
     return (
@@ -30,7 +29,6 @@ const App = () => {
                 <Route path="/" element={<IndexForDev />} />
                 <Route path="/top" element={<Top />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/searchBoxSample" element={<SearchBoxSample />} />
                 <Route
                     path="/touristAreaRegister"
                     element={<TouristAreaRegister />}

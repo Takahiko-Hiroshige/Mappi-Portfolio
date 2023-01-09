@@ -16,31 +16,22 @@ const CategoryChip = (props) => {
         categories,
         size = "small", // medium|small
         onDelete, // function
-        isOutlineStyle = false,
     } = props;
 
     // style
     let palette = {};
-    if (!isOutlineStyle) {
-        categories.forEach((category) => {
-            palette[category.value] = {
-                main: category.color,
-                contrastText: "#FFFFFF",
-            };
-        });
-    } else {
-        categories.forEach((category) => {
-            palette[category.value] = {
-                main: "#FFFFFF",
-                contrastText: "#000000",
-            };
-        });
-    }
+    categories.forEach((category) => {
+        palette[category.value] = {
+            main: category.color,
+            contrastText: "#000000",
+        };
+    });
+
     const theme = createTheme({
         palette,
     });
 
-    const addOptions = {};
+    const addOptions = { variant: "outlined" };
     if (onDelete) addOptions["onDelete"] = onDelete;
 
     return (
@@ -48,21 +39,12 @@ const CategoryChip = (props) => {
             <Stack direction="row" spacing={1}>
                 <ThemeProvider theme={theme}>
                     {categories?.map((category) => {
-                        // style
-                        if (!isOutlineStyle) {
-                            addOptions["color"] = category.value;
-                        } else {
-                            addOptions["variant"] = "outlined";
-                        }
+                        addOptions["color"] = category.value;
                         return (
                             <Chip
                                 key={category.value}
                                 size={size}
-                                label={
-                                    isOutlineStyle
-                                        ? `#${category.label}`
-                                        : category.label
-                                }
+                                label={`#${category.label}`}
                                 {...addOptions}
                             />
                         );

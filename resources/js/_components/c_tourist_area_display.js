@@ -23,7 +23,7 @@ import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined
  *import components
  */
 import ModalFrame from "./common/c_modal_frame.js";
-import TouristAreaDitailModal from "../modals/m_tourist_area_ditail_modal.js";
+import TouristAreaDitailModal from "../_modals/m_tourist_area_ditail_modal.js";
 import CategoryChip from "./common/c_category_chip.js";
 /**
  *import file
@@ -36,7 +36,7 @@ const TouristAreaDisplay = (props) => {
         imageArray,
         touristAreaName,
         touristAreaCatchPhrase,
-        touristAreaDeTail,
+        touristAreaDetail,
         categoryListSelectValue,
         cityListSelectValue,
         cityListOptions,
@@ -91,7 +91,6 @@ const TouristAreaDisplay = (props) => {
                         <div className={"mb-2 truncate h-7 max-h-7 border-b"}>
                             <CategoryChip
                                 categories={categoryListSelectValue}
-                                isOutlineStyle={true}
                             />
                         </div>
                         <Typography
@@ -107,7 +106,7 @@ const TouristAreaDisplay = (props) => {
                                 "h-20 pl-2 pr-2 max-h-20 min-h-20 text-gray-600 truncate whitespace-pre-wrap line-clamp-3"
                             }
                         >
-                            {touristAreaDeTail}
+                            {touristAreaDetail}
                         </Typography>
                     </CardBody>
                     <CardFooter divider className="h-12 flex py-3">
@@ -166,7 +165,7 @@ const TouristAreaDisplay = (props) => {
                             imageArray={imageArray}
                             touristAreaName={touristAreaName}
                             touristAreaCatchPhrase={touristAreaCatchPhrase}
-                            touristAreaDeTail={touristAreaDeTail}
+                            touristAreaDetail={touristAreaDetail}
                             categoryListSelectValue={categoryListSelectValue}
                             cityListSelectValue={cityListSelectValue}
                             cityListOptions={cityListOptions}
