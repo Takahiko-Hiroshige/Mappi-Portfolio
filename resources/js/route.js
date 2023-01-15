@@ -18,7 +18,7 @@ import IndexForDev from "./_pages/index_for_dev.js";
 import Top from "./_pages/p_top.js";
 import Home from "./_pages/p_home.js";
 import TouristAreaRegister from "./_pages/p_tourist_area_register.js";
-
+import ReactTsparticles from "./_components/common/c_particles.js";
 const App = () => {
     return (
         <div>
@@ -33,6 +33,10 @@ const App = () => {
                     path="/touristAreaRegister"
                     element={<TouristAreaRegister />}
                 />
+                <Route
+                    path="/ReactTsparticles"
+                    element={<ReactTsparticles />}
+                />
             </Routes>
         </div>
     );
@@ -41,7 +45,6 @@ const App = () => {
 ReactDOM.render(
     /**
      * ToDo::ErrorBoundaryの配置箇所検討要
-     * ToDo::AxiosErrorModalの配置箇所検討要
      */
     <ErrorBoundary>
         <BrowserRouter>

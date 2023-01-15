@@ -26,11 +26,16 @@ import { funcs } from "../utils/functions.js";
  *import validation
  */
 import { validationChecker } from "../utils/validation/validation_checker.js";
+/**
+ *import register
+ */
+import { registerExec } from "../utils/register.js";
 
 const TouristAreaRegisterInputForm = () => {
     const [cityListOptions, setCityListOptions] = useState([]);
     const [imageFileArray, setImageFileArray] = useState([]);
-    // storeを監視
+
+    /**storeを監視 */
     const touristAreaRegisterData = useSelector(
         (state) => state.touristAreaRegisterData.value
     );
@@ -49,14 +54,14 @@ const TouristAreaRegisterInputForm = () => {
         relationUrl,
     } = touristAreaRegisterData;
 
+    const dispatch = useDispatch();
+
     const inputRef = useRef(null);
     const fileUpload = () => {
         inputRef.current.click();
     };
 
-    const dispatch = useDispatch();
-
-    // バリデーション
+    /**バリデーション */
     const {
         register,
         handleSubmit,
@@ -88,60 +93,57 @@ const TouristAreaRegisterInputForm = () => {
         );
     };
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         selectItemValidation();
         if (!Object.keys(errors).length) {
-            createTouristArea();
+            await createTouristArea();
         }
     };
-
     const onError = () => {
         selectItemValidation();
     };
 
-    //TODO::registerディレクトリに新規ファイルで移行
+    /**登録処理 */
     const createTouristArea = async () => {
-        console.warn("登録実施");
-        // const data = {
-        //     displayImage: 0,
-        //     displayImage: displayImage.file,
-        //     // imageArray: imageFileArray,
-        //     touristAreaName,
-        //     touristAreaCatchPhrase,
-        //     touristAreaDetail,
-        //     categoryListSelectValue: 0,
-        //     cityListSelectValue: cityListSelectValue.value,
-        //     postal: parseInt(postal),
-        //     numberAddress,
-        //     otherAddress,
-        //     phoneNumber,
-        //     relationUrl,
-        // };
-        // const params = new FormData();
-        // Object.entries(data).forEach(([key, value]) => {
-        //     console.warn(value);
-        //     const setKey = Array.isArray(value) ? `${key}` : key;
-        //     params.append(setKey, value);
-        // });
-        // imageFileArray.map((image) => {
-        //     params.append("imageArray[]", image);
-        // });
-        // const config = {
-        //     headers: { "content-type": "multipart/form-data" },
-        // };
-        // //入力値を投げる
-        // await axios
-        //     .post("/api/TouristArea/create", params, config)
-        //     .then((res) => {
-        //         //戻り値をtodosにセット
-        //         // const tempPosts = posts;
-        //         // tempPosts.push(res.data);
-        //         // setPosts(tempPosts);
-        //         // setData("");
-        //     });
+        const data = {
+            /**touristArea */
+            touristAreaName,
+            touristAreaCatchPhrase,
+            touristAreaDetail,
+            touristAreaCategories: categoryListSelectValue
+                .map((item) => item.value)
+                .join(","),
+            touristAreaCity: cityListSelectValue.value,
+            touristAreaPostal: postal,
+            touristAreaNumberAddress: numberAddress,
+            touristAreaOtherAddress: otherAddress,
+            touristAreaPhoneNumber: phoneNumber,
+            touristAreaRelationUrl: relationUrl,
+            /**images */
+            displayImage: displayImage.fileName,
+            imageArray: imageFileArray.reduce((acc, cur) => {
+                return imageArray.some((image) => cur.name === image.fileName)
+                    ? [...acc, cur]
+                    : acc;
+            }, []),
+        };
+        await registerExec({
+            apiPath: "/api/TouristArea/create",
+            data,
+            headers: {
+                "content-type": "multipart/form-data",
+            },
+            setError,
+            func: () => {
+                /**登録用データをクリア */
+                dispatch(setTouristAreaRegisterData());
+                setImageFileArray([]);
+            },
+        });
     };
 
-    // 福岡県の市町村を取得[API]
+    // ToDo::useMemo化
+    /**福岡県の市町村を取得[API] */
     useEffect(() => {
         const area = "福岡県";
         axios
@@ -162,7 +164,6 @@ const TouristAreaRegisterInputForm = () => {
             });
     }, []);
 
-    // displayImageのdefault設定
     useEffect(() => {
         if (!displayImage && imageArray.length > 0) {
             dispatch(
@@ -176,23 +177,23 @@ const TouristAreaRegisterInputForm = () => {
 
     //TODO::カテゴリは後ほどDBから取得するように変更予定
     const categoryOptions = [
-        { label: "絶景", value: "superbView", color: "#6927FF" },
-        { label: "宿泊", value: "Lodging", color: "#0000FF" },
-        { label: "運動", value: "exercise", color: "#00FFFF" },
-        { label: "飲食", value: "eatingAndDrinking", color: "#FF00FF" },
+        { label: "絶景", value: 0, color: "#6927FF" },
+        { label: "宿泊", value: 1, color: "#0000FF" },
+        { label: "運動", value: 2, color: "#00FFFF" },
+        { label: "飲食", value: 3, color: "#FF00FF" },
     ];
 
-    // 郵便番号にて住所特定[API]
-    const onClickPostalSearchButton = () => {
+    /**郵便番号にて住所特定[API]*/
+    const onClickPostalSearchButton = async () => {
         if (errors.postal?.message) return;
         if (!postal) {
-            setError("postal", {
+            setError("touristAreaPostal", {
                 type: "notExist",
                 message: "郵便番号が入力されていません",
             });
             return;
         }
-        axios
+        await axios
             .get(
                 `http://geoapi.heartrails.com/api/json?method=searchByPostal&postal=${postal}`
             )
@@ -201,14 +202,18 @@ const TouristAreaRegisterInputForm = () => {
                     (item) => item.value === res.data.response.location[0].city
                 );
                 if (!setCity) {
-                    setError("postal", {
+                    setError("touristAreaPostal", {
                         type: "notExist",
                         message: "入力された郵便番号は福岡県内に存在しません",
                     });
                     return;
                 }
                 const setTown = res.data.response.location[0].town;
-                clearErrors(["postal", "cityListSelectValue", "numberAddress"]);
+                clearErrors([
+                    "touristAreaPostal",
+                    "touristAreaCity",
+                    "touristAreaNumberAddress",
+                ]);
                 dispatch(
                     setTouristAreaRegisterData({
                         ...touristAreaRegisterData,
@@ -218,7 +223,7 @@ const TouristAreaRegisterInputForm = () => {
                 );
             })
             .catch(() => {
-                setError("postal", {
+                setError("touristAreaPostal", {
                     type: "notExist",
                     message: "入力された郵便番号は存在しません",
                 });
@@ -279,7 +284,11 @@ const TouristAreaRegisterInputForm = () => {
 
     return (
         <div className="w-[80%] max-w-[40rem]">
-            <form onSubmit={handleSubmit(onSubmit, onError)}>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                }}
+            >
                 <div className="w-full min-w-[19rem] h-[48rem] rounded-lg border border-gray-800 bg-gray-100 p-2 overflow-auto">
                     <div className="mb-3">
                         <label
@@ -288,8 +297,8 @@ const TouristAreaRegisterInputForm = () => {
                         >
                             ➤観光名所（名称）
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
                             {errors.touristAreaName?.message}
@@ -318,24 +327,24 @@ const TouristAreaRegisterInputForm = () => {
                     </div>
                     <div className="mb-2">
                         <label
-                            htmlFor="postCode"
+                            htmlFor="touristAreaPostal"
                             className="ml-1 mb-2 text-sm font-medium text-gray-900 text-black"
                         >
                             ➤郵便番号（- ハイフン不要）
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                            {errors.postal?.types?.integer ||
-                                errors.postal?.message}
+                            {errors.touristAreaPostal?.types?.integer ||
+                                errors.touristAreaPostal?.message}
                         </div>
                         <div className="flex">
                             <input
                                 className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
                                 placeholder="例）0000000"
                                 value={postal}
-                                {...register("postal", {
+                                {...register("touristAreaPostal", {
                                     required: "入力されていません",
                                     minLength: {
                                         value: 7,
@@ -348,7 +357,7 @@ const TouristAreaRegisterInputForm = () => {
                                             "半角数字の7文字で入力してください",
                                     },
                                     validate: {
-                                        postal: (value) =>
+                                        touristAreaPostal: (value) =>
                                             validationChecker.integer(value) ||
                                             "半角数字の7文字で入力してください",
                                     },
@@ -386,8 +395,8 @@ const TouristAreaRegisterInputForm = () => {
                             >
                                 ➤市町村・区
                             </label>
-                            <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                                ※必須
+                            <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                                必須
                             </span>
                             <div className="ml-3 mb-1 text-sm font-medium text-red-600">
                                 {errors.cityListSelectValue?.message}
@@ -413,25 +422,34 @@ const TouristAreaRegisterInputForm = () => {
                         </div>
                         <div className="ml-3 w-1/2">
                             <label
-                                htmlFor="numberAddress"
+                                htmlFor="touristAreaNumberAddress"
                                 className="ml-1 mb-2 text-sm font-medium text-gray-900"
                             >
                                 ➤字・番地
                             </label>
-                            <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                                ※必須
+                            <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                                必須
                             </span>
                             <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                                {errors.numberAddress?.message}
+                                {errors.touristAreaNumberAddress?.message}
                             </div>
                             <input
                                 className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
                                 placeholder="例）〇〇1-1-1"
                                 value={numberAddress}
-                                {...register("numberAddress", {
-                                    required: "入力されていません",
+                                {...register("touristAreaNumberAddress", {
+                                    validate: {
+                                        touristAreaNumberAddress: (value) => {
+                                            clearErrors(
+                                                "touristAreaNumberAddress"
+                                            );
+                                            return numberAddress || value
+                                                ? true
+                                                : "入力されていません";
+                                        },
+                                    },
                                     onChange: (e) => {
-                                        clearErrors("numberAddress");
+                                        clearErrors("touristAreaNumberAddress");
                                         dispatch(
                                             setTouristAreaRegisterData({
                                                 ...touristAreaRegisterData,
@@ -445,16 +463,16 @@ const TouristAreaRegisterInputForm = () => {
                     </div>
                     <div className="w-full mb-3">
                         <label
-                            htmlFor="otherAddress"
+                            htmlFor="touristAreaOtherAddress"
                             className="ml-1 mb-2 text-sm font-medium text-gray-900"
                         >
                             ➤その他住所
                         </label>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                            {errors.otherAddress?.message}
+                            {errors.touristAreaOtherAddress?.message}
                         </div>
                         <input
-                            id="touristAreaCatchPhrase"
+                            id="touristAreaOtherAddress"
                             className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
                             placeholder="例）建物・マンション名"
                             value={otherAddress}
@@ -470,30 +488,30 @@ const TouristAreaRegisterInputForm = () => {
                     </div>
                     <div className="w-full mb-3">
                         <label
-                            htmlFor="phoneNumber"
+                            htmlFor="touristAreaPhoneNumber"
                             className="ml-1 mb-2 text-sm font-medium text-gray-900"
                         >
                             ➤電話番号（- ハイフン不要）
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                            {errors.phoneNumber?.message}
+                            {errors.touristAreaPhoneNumber?.message}
                         </div>
                         <input
                             className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
                             placeholder="例）00000000000"
                             value={phoneNumber}
-                            {...register("phoneNumber", {
+                            {...register("touristAreaPhoneNumber", {
                                 required: "入力されていません",
                                 validate: {
-                                    phoneNumber: (value) =>
+                                    touristAreaPhoneNumber: (value) =>
                                         validationChecker.phoneNumber(value) ||
                                         "半角数字で電話番号を入力してください",
                                 },
                                 onChange: (e) => {
-                                    clearErrors("phoneNumber");
+                                    clearErrors("touristAreaPhoneNumber");
                                     dispatch(
                                         setTouristAreaRegisterData({
                                             ...touristAreaRegisterData,
@@ -511,8 +529,8 @@ const TouristAreaRegisterInputForm = () => {
                         >
                             ➤画像　※複数選択可能
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
                             {errors.imageArray?.message}
@@ -607,20 +625,20 @@ const TouristAreaRegisterInputForm = () => {
                     </div>
                     <div className="mb-3">
                         <label
-                            htmlFor="categoryListSelectValue"
+                            htmlFor="touristAreaCategories"
                             className="ml-1 mb-2 text-sm font-medium text-gray-900 text-black"
                         >
                             ➤カテゴリ
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                            {errors.categoryListSelectValue?.message}
+                            {errors.touristAreaCategories?.message}
                         </div>
                         <SelectBox
                             onChange={(e) => {
-                                clearErrors("categoryListSelectValue");
+                                clearErrors("touristAreaCategories");
                                 dispatch(
                                     setTouristAreaRegisterData({
                                         ...touristAreaRegisterData,
@@ -641,8 +659,8 @@ const TouristAreaRegisterInputForm = () => {
                         >
                             ➤キャッチフレーズ
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
                             {errors.touristAreaCatchPhrase?.message}
@@ -653,6 +671,10 @@ const TouristAreaRegisterInputForm = () => {
                             value={touristAreaCatchPhrase}
                             {...register("touristAreaCatchPhrase", {
                                 required: "入力されていません",
+                                maxLength: {
+                                    value: 30,
+                                    message: "30文字以内で入力してください",
+                                },
                                 onChange: (e) => {
                                     clearErrors("touristAreaCatchPhrase");
                                     dispatch(
@@ -673,8 +695,8 @@ const TouristAreaRegisterInputForm = () => {
                         >
                             ➤観光地説明
                         </label>
-                        <span className="ml-1 mb-1 text-sm font-medium text-red-600">
-                            ※必須
+                        <span className="ml-1 mb-1 text-sm border-1 border-red-400 bg-red-300 text-white rounded pl-1 pr-1">
+                            必須
                         </span>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
                             {errors.touristAreaDetail?.message}
@@ -686,6 +708,10 @@ const TouristAreaRegisterInputForm = () => {
                             value={touristAreaDetail}
                             {...register("touristAreaDetail", {
                                 required: "入力されていません",
+                                maxLength: {
+                                    value: 500,
+                                    message: "500文字以内で入力してください",
+                                },
                                 onChange: (e) => {
                                     clearErrors("touristAreaDetail");
                                     dispatch(
@@ -700,30 +726,29 @@ const TouristAreaRegisterInputForm = () => {
                     </div>
                     <div className="w-full mb-3">
                         <label
-                            htmlFor="relationUrl"
+                            htmlFor="touristAreaRelationUrl"
                             className="ml-1 mb-2 text-sm font-medium text-gray-900"
                         >
                             ➤関連サイトURL
                         </label>
                         <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                            {errors.relationUrl?.message}
+                            {errors.touristAreaRelationUrl?.message}
                         </div>
                         <input
                             type="text"
-                            id="relationUrl"
                             className="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
                             placeholder="例）https://mappi.com/"
                             value={relationUrl}
-                            {...register("relationUrl", {
+                            {...register("touristAreaRelationUrl", {
                                 validate: {
-                                    relationUrl: (value) =>
+                                    touristAreaRelationUrl: (value) =>
                                         validationChecker.url(value) ||
                                         value === ""
                                             ? true
                                             : "正しいURLを入力してください",
                                 },
                                 onChange: (e) => {
-                                    clearErrors("relationUrl");
+                                    clearErrors("touristAreaRelationUrl");
                                     dispatch(
                                         setTouristAreaRegisterData({
                                             ...touristAreaRegisterData,
@@ -739,12 +764,14 @@ const TouristAreaRegisterInputForm = () => {
                     <button
                         type="submit"
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded text-sm"
+                        onClick={handleSubmit(onSubmit, onError)}
                     >
                         下書き保存
                     </button>
                     <button
                         type="submit"
                         className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded text-sm"
+                        onClick={handleSubmit(onSubmit, onError)}
                     >
                         投稿
                     </button>

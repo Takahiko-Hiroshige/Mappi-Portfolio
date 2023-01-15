@@ -55,6 +55,7 @@
     "react-id-swiper": "^3.0.0",
     "react-modal": "^3.16.1",
     "react-native-geocoding": "^0.5.0",
+    "react-particles": "^2.7.1",
     "react-query": "^3.39.1",
     "react-redux": "^8.0.4",
     "react-responsive": "^9.0.0",
@@ -62,10 +63,12 @@
     "react-router-dom": "^6.3.0",
     "react-select": "^5.6.0",
     "react-slick": "^0.29.0",
+    "react-tsparticles": "^2.7.1",
     "redux": "^4.2.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
-    "swiper": "^6.8.4"
+    "swiper": "^6.8.4",
+    "tsparticles": "^2.7.1"
   },
   "name": "html",
   "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",

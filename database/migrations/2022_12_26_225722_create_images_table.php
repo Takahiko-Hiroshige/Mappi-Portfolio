@@ -15,6 +15,8 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id')->unique('id')->comment('ID');
+            $table->string('image_relation_tabel', 100)->comment('関連テーブル');
+            $table->integer('image_relation_id')->comment('関連ID');
             $table->string('image_name', 100)->comment('画像名');
             $table->string('image_path', 100)->comment('画像Path');
             $table->boolean('image_display_flg')->default(false)->comment('メイン画像フラグ');

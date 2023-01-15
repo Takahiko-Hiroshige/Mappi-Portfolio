@@ -42,7 +42,6 @@ const TouristAreaRegisterConfirm = () => {
         relationUrl,
     } = touristAreaRegisterData;
 
-    // TODO::端末ごとに変数で値を定義させる
     const windowSize = useWindow();
     const windowWidthSize = windowSize.width;
     let mulValue = 1;
