@@ -1,3 +1,4 @@
+/**削除予定 */
 import * as React from "react";
 import PropTypes from "prop-types";
 import Paper from "@mui/material/Paper";
@@ -19,7 +20,7 @@ const MainFeaturedPost = (props) => {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundImage: `url(${post.image})`,
-                height: "500px"
+                height: "500px",
             }}
         >
             {/* Increase the priority of the hero background image */}
@@ -60,7 +61,10 @@ const MainFeaturedPost = (props) => {
                         <Typography variant="h3" color="inherit" paragraph>
                             {post.description}
                         </Typography>
-                        <Link variant="subtitle1" href="https://www.amazon.co.jp/">
+                        <Link
+                            variant="subtitle1"
+                            href="https://www.amazon.co.jp/"
+                        >
                             {post.linkText}
                         </Link>
                     </Box>
@@ -68,7 +72,7 @@ const MainFeaturedPost = (props) => {
             </Grid>
         </Paper>
     );
-}
+};
 
 MainFeaturedPost.propTypes = {
     post: PropTypes.shape({

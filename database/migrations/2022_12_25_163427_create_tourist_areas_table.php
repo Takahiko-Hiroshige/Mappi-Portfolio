@@ -22,10 +22,9 @@ class CreateTouristAreasTable extends Migration
             $table->string('tourist_area_city', 30)->comment('市町村');
             $table->string('tourist_area_number_address', 100)->comment('字・番地');
             $table->string('tourist_area_other_address', 100)->nullable()->comment('その他住所');
-            $table->string('tourist_area_phone_number',17)->comment('電話番号')->change();
+            $table->string('tourist_area_phone_number', 17)->comment('電話番号')->change();
             $table->string('tourist_area_relation_url', 100)->nullable()->comment('関連サイト');
             $table->string('tourist_area_category_ids', 100)->comment('カテゴリ※カンマ区切り文字列')->change();
-            $table->foreign('tourist_area_image_id')->references('id')->on('images')->nullable()->comment('imagesテーブルのid')->change();
             $table->timestamps();
             $table->softDeletes()->comment('論理削除フラグ');
         });

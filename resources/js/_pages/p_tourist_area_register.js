@@ -10,11 +10,14 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+
 /**
  *import components
  */
 import TouristAreaRegisterInputForm from "../_layouts/l_tourist_area_register_input_form.js";
 import TouristAreaRegisterConfirm from "../_layouts/l_tourist_area_register_confirm.js";
+import ReactTsparticles from "../_components/common/c_particles.js";
+import { touristAreaRegisterParticlesOption } from "../_objects/particles-objects/touristAreaRegisterParticlesOption.js";
 
 const TouristAreaRegister = () => {
     const [selectDisplayValue, setSelectDisplayValue] = useState(0);
@@ -25,6 +28,7 @@ const TouristAreaRegister = () => {
 
     return (
         <div>
+            <ReactTsparticles options={touristAreaRegisterParticlesOption} />
             <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
                 <Tabs
                     value={selectDisplayValue}
