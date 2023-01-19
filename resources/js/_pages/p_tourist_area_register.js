@@ -17,7 +17,7 @@ import Tab from "@mui/material/Tab";
 import TouristAreaRegisterInputForm from "../_layouts/l_tourist_area_register_input_form.js";
 import TouristAreaRegisterConfirm from "../_layouts/l_tourist_area_register_confirm.js";
 import ReactTsparticles from "../_components/common/c_particles.js";
-import { touristAreaRegisterParticlesOption } from "../_objects/particles-objects/touristAreaRegisterParticlesOption.js";
+import { touristAreaRegisterParticlesOption } from "../_objects/particles-objects/tourist_area_registe_particles_option.js";
 
 const TouristAreaRegister = () => {
     const [selectDisplayValue, setSelectDisplayValue] = useState(0);
