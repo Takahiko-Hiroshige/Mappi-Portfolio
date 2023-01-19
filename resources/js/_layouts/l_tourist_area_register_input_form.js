@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
  */
 import { useDispatch, useSelector } from "react-redux";
 import { setTouristAreaRegisterData } from "../_redux/slices/tourist_area_register_data_slice.js";
+import { displaySppiner } from "../_redux/slices/react_sppiner_slice.js";
 /**
  *import components
  */
@@ -111,7 +112,7 @@ const TouristAreaRegisterInputForm = () => {
             touristAreaCatchPhrase,
             touristAreaDetail,
             touristAreaCategories: categoryListSelectValue
-                .map((item) => item.value)
+                .map((item) => item.id)
                 .join(","),
             touristAreaCity: cityListSelectValue.value,
             touristAreaPostal: postal,
@@ -134,7 +135,23 @@ const TouristAreaRegisterInputForm = () => {
                 "content-type": "multipart/form-data",
             },
             setError,
-            func: () => {
+            beforeExecFunc: () => {
+                /**spinner表示 */
+                dispatch(
+                    displaySppiner({
+                        isDisplay: true,
+                    })
+                );
+            },
+            afterExecFunc: () => {
+                /**spinner非表示 */
+                dispatch(
+                    displaySppiner({
+                        isDisplay: false,
+                    })
+                );
+            },
+            afterSuccessFunc: () => {
                 /**登録用データをクリア */
                 dispatch(setTouristAreaRegisterData());
                 setImageFileArray([]);
@@ -177,10 +194,10 @@ const TouristAreaRegisterInputForm = () => {
 
     //TODO::カテゴリは後ほどDBから取得するように変更予定
     const categoryOptions = [
-        { label: "絶景", value: "superbView", color: "#6927FF" },
-        { label: "宿泊", value: "lodging", color: "#0000FF" },
-        { label: "運動", value: "motion", color: "#00FFFF" },
-        { label: "飲食", value: "meal", color: "#FF00FF" },
+        { id: 0, label: "絶景", value: "superbView", color: "#6927FF" },
+        { id: 1, label: "宿泊", value: "lodging", color: "#0000FF" },
+        { id: 2, label: "運動", value: "motion", color: "#00FFFF" },
+        { id: 3, label: "飲食", value: "meal", color: "#FF00FF" },
     ];
 
     /**郵便番号にて住所特定[API]*/

@@ -10,24 +10,6 @@
  * Reducerが作成した新しいStateをStoreが保存する
  * Storeからデータを参照してViewに描画する
  */
-
-/**
- * Action Creator
- * Actionを作るためのロジック
- */
-
-/**
- * Action
- * Store内の値を変更するために発行される処理
- * オブジェクト
- * {type:"文字列", payload（任意）}
- */
-
-/**
- * createSliceでは、action type文字列、ActionCreator関数、actionオブジェクトの生成
- * 下記でいくとactionのTypeは"isOpenErrorModal/ErrorEvent"となる
- */
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialStateObj = {
