@@ -27,6 +27,7 @@ export const registerExec = async ({
     });
     await axios.post(apiPath, params, headers).then((res) => {
         if (res.data.failedValidation) {
+            /**バッグ側のバリデーションで引っかかった場合、setErrorに渡す */
             Object.entries(res.data.errors).forEach(([key, value]) => {
                 setError(key, {
                     type: "failedValidation",

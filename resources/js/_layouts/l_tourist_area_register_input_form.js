@@ -25,7 +25,7 @@ import { funcs } from "../utils/functions.js";
 /**
  *import validation
  */
-import { validationChecker } from "../utils/validation/validation_checker.js";
+import { validationChecker } from "../utils/validation_checker.js";
 /**
  *import register
  */
@@ -80,12 +80,12 @@ const TouristAreaRegisterInputForm = () => {
                 },
                 {
                     value: cityListSelectValue,
-                    name: "cityListSelectValue",
+                    name: "touristAreaCity",
                     message: "選択されていません",
                 },
                 {
                     value: categoryListSelectValue,
-                    name: "categoryListSelectValue",
+                    name: "touristAreaCategories",
                     message: "選択されていません",
                 },
             ],
@@ -177,10 +177,10 @@ const TouristAreaRegisterInputForm = () => {
 
     //TODO::カテゴリは後ほどDBから取得するように変更予定
     const categoryOptions = [
-        { label: "絶景", value: 0, color: "#6927FF" },
-        { label: "宿泊", value: 1, color: "#0000FF" },
-        { label: "運動", value: 2, color: "#00FFFF" },
-        { label: "飲食", value: 3, color: "#FF00FF" },
+        { label: "絶景", value: "superbView", color: "#6927FF" },
+        { label: "宿泊", value: "lodging", color: "#0000FF" },
+        { label: "運動", value: "motion", color: "#00FFFF" },
+        { label: "飲食", value: "meal", color: "#FF00FF" },
     ];
 
     /**郵便番号にて住所特定[API]*/
@@ -390,7 +390,7 @@ const TouristAreaRegisterInputForm = () => {
                     <div className="flex w-full mb-2">
                         <div className="w-1/2">
                             <label
-                                htmlFor="cityListSelectValue"
+                                htmlFor="touristAreaCity"
                                 className="ml-1 mb-2 text-sm font-medium text-gray-900"
                             >
                                 ➤市町村・区
@@ -399,11 +399,11 @@ const TouristAreaRegisterInputForm = () => {
                                 必須
                             </span>
                             <div className="ml-3 mb-1 text-sm font-medium text-red-600">
-                                {errors.cityListSelectValue?.message}
+                                {errors.touristAreaCity?.message}
                             </div>
                             <SelectBox
                                 onChange={(e) => {
-                                    clearErrors("cityListSelectValue");
+                                    clearErrors("touristAreaCity");
                                     dispatch(
                                         setTouristAreaRegisterData({
                                             ...touristAreaRegisterData,

@@ -5,7 +5,7 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
-import { ErrorEvent } from "./_redux/slices/axios_error_slice.js";
+import { ErrorEvent } from "../_redux/slices/axios_error_slice.js";
 
 /*intercept*
  * You can intercept requests or responses before they are handled by then or catch.
