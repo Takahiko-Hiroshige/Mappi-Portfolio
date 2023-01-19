@@ -34,7 +34,7 @@ class TouristAreaRegisterRequest extends FormRequest
             'touristAreaPostal' => ['required', 'digits:7'],
             'touristAreaNumberAddress' => ['required'],
             'touristAreaPhoneNumber' => ['required', 'regex:/^[0-9\-]+$/i', 'max:14'],
-            'touristAreaRelationUrl' => ['required', 'url'],
+            'touristAreaRelationUrl' => ['url'],
         ];
     }
 
@@ -55,7 +55,6 @@ class TouristAreaRegisterRequest extends FormRequest
             'touristAreaPhoneNumber.required' => '入力されていません',
             'touristAreaPhoneNumber.regex' => '半角数字で電話番号を入力してください',
             'touristAreaPhoneNumber.max' => '半角数字で電話番号を入力してください',
-            'touristAreaRelationUrl.required'  => '入力されていません',
             'touristAreaRelationUrl.url'  => '正しいURLを入力してください',
         ];
     }

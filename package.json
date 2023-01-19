@@ -53,6 +53,7 @@
     "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.41.5",
     "react-id-swiper": "^3.0.0",
+    "react-loading": "^2.0.3",
     "react-modal": "^3.16.1",
     "react-native-geocoding": "^0.5.0",
     "react-particles": "^2.7.1",

@@ -4,14 +4,19 @@ import axios from "axios";
  * @param {String} apiPath APIのPath
  * @param {Object} data 登録データ
  * @param {function} setError セットエラー関数
- * @param {function} func 登録処理完了後の実行関数
+ * @param {function} beforeExecFunc 登録処理前の実行関数
+ * @param {function} afterExecFunc 登録処理後の実行関数
+ * @param {function} afterSuccessFunc 登録処理完了後の実行関数
  */
+
 export const registerExec = async ({
     apiPath,
     data,
     headers,
     setError,
-    func = () => {},
+    beforeExecFunc = () => {},
+    afterExecFunc = () => {},
+    afterSuccessFunc = () => {},
 }) => {
     const params = new FormData();
     Object.entries(data).forEach(([key, value]) => {
@@ -25,6 +30,7 @@ export const registerExec = async ({
             params.append(setKey, value);
         }
     });
+    beforeExecFunc();
     await axios.post(apiPath, params, headers).then((res) => {
         if (res.data.failedValidation) {
             /**バッグ側のバリデーションで引っかかった場合、setErrorに渡す */
@@ -35,7 +41,8 @@ export const registerExec = async ({
                 });
             });
         } else {
-            func();
+            afterSuccessFunc();
         }
     });
+    afterExecFunc();
 };
